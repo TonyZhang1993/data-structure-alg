@@ -16,6 +16,11 @@ data-structure-alg仓库记录自己重温数据结构与算法的练习
 
 **🎯Target : 计划是每天至少有一次练习的提交！！！FLAG 立起来！用输出的方式倒逼自己更好的学习**
 
+> Helping Site: 
+<br> [leetcode animation](https://github.com/TonyZhang1993/LeetCodeAnimation/tree/master)
+<br> [瓶子君](https://github.com/TonyZhang1993/JavaScript-Algorithms/tree/master)
+<br> [算法模板](https://github.com/TonyZhang1993/algorithm-pattern/tree/master)
+<br> [ssh力扣记录](https://github.com/sl1673495/leetcode-javascript/issues)
 
 
 ## JS专题
