@@ -90,11 +90,30 @@ function Person() {
 var person = new Person();
 
 console.log(person.__proto__ == Person.prototype) // true
-console.log(Person.prototype.constructor == Person) // true
+
 // 顺便学习一个ES5的方法,可以获得对象的原型
 console.log(Object.getPrototypeOf(person) === Person.prototype) // true
+
+//  person 中并没有 constructor 属性,当不能读取到constructor 属性时，会从 person 的原型也就是 Person.prototype 中读取
+person.constructor === Person // true
+Person.prototype.constructor === Person // true
+
+Object.prototype.__proto__ === null //  Object.prototype没有原型
+
+// prototype是函数才会有的属性
+Person.prototype.name = 'Kevin';
+person.name //  'Kevin'
+
 ```
-TO be continued.......
+
+```
+知识点：
+- __proto__然而它并不存在于 Person.prototype 中
+实际上，它是来自于 Object.prototype ，与其说是一个属性，不如说是一个 getter/setter，当使用 obj.__proto__ 时，可以理解成返回了 Object.getPrototypeOf(obj)。
+- 每个函数都有一个 prototype 属性
+- 读取 person.name，从 person 对象中找不到 name 属性就会从 person 的原型也就是 person.__proto__ ，也就是 Person.prototype中查找
+```
+
 
 reference: [JavaScript深入之从原型到原型链
 ](https://github.com/mqyqingfeng/Blog/issues/2)
