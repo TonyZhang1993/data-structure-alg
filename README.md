@@ -23,6 +23,7 @@ data-structure-alg仓库记录自己重温数据结构与算法的练习
 
 
 ## JS专题
+- [手写call-apply-bind](./js/手写call-apply-bind.md)
 
 ## 数据结构与算法
 
