@@ -278,7 +278,7 @@ Array.prototype.concat.apply([], arrayLike)
     console.log('获取除第一个参数的剩余参数数组', args);
   }
 
-  // 透传参数
+  // 透传参数!!!!!!
   function test4(first, ...args) {
     fn(...args);
     fn(...arguments);
