@@ -101,8 +101,8 @@ reference: [基本类型](https://developer.mozilla.org/zh-CN/docs/Web/JavaScrip
 ```
 
 ### 原型&原型链
-![Alt text](image-1.png)
-![Alt text](069B73B9-7B08-453A-8C62-8CE23CC972BD.png)
+![Alt text](../images/image-1.png)
+![Alt text](../images/image-2.png)
 ```js
 function Person() {
 
