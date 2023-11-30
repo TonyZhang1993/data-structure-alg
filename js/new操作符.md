@@ -28,12 +28,20 @@ obj.__proto__ = fn.prototype;
 fn.call(obj);
 ```
 
-- instanceof: 检测构造函数的 prototype 属性是否出现在某个实例对象的原型链上。
+- instanceof: 运算符用于检测构造函数的 prototype 属性是否出现在某个实例对象的原型链上<br>
+`object instanceof constructor`
 - hasOwnProperty: 检测一个属性是存在于实例中, 不计原型链中属性
 - in: 判断实例中或者原型中是否有该属性；
 
 ```js
-person1 instanceof Object  //true  判断对象是否为Object实例
+function Person() {}
+const person1 = new Person()
+
+person1 instanceof Person //  true
+person1.__proto__ === Person.prototype
+Person.prototype.constructor = Person
+
+person1 instanceof Object  //true  判断Object的prototype是否出现在person1的原型链上
 person1.hasOwnProperty('name')  //true  检测一个属性是存在于实例中
 'name' in person1   //true   判断实例中或者原型中是否有该属性；
 ```
@@ -44,12 +52,15 @@ function mynew(func, ...args) {
   // 1.创建一个新对象
   var obj = {}
   // 2.新对象原型指向构造函数原型对象
-  obj.__proto__ = func.prototypt
+  obj.__proto__ = func.prototype
   // 3.将构建函数的this指向新对象
   const result = func.apply(func, args)  //  args 为数组
   // 4.根据返回值判断
   return result instanceof Object ? result : obj
 }
+
+//  注意 {} instanceof Object 报错
+//  因为{}不是通过new Object 创建的，是普通对象，无prototype属性
 ```
 
 reference: [new操作符](https://vue3js.cn/interview/JavaScript/new.html#%E4%B8%80%E3%80%81%E6%98%AF%E4%BB%80%E4%B9%88)

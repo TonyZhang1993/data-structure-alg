@@ -96,6 +96,18 @@ reference: [基本类型](https://developer.mozilla.org/zh-CN/docs/Web/JavaScrip
 
 凡是通过 new Function() 创建的对象都是函数对象，其他的都是普通对象。
 
+new Object ，new Function 是JS自带的函数对象
+//  example
+function myFunction(a,b){
+    return a+b;
+}
+//等价于
+var myFunction=new Function("a","b","return a+b");
+
+函数对象的一个属性就是原型对象 prototype。注：普通对象没有prototype,但有__proto__属性。
+
+JS在创建对象（不论是普通对象还是函数对象）的时候，都有一个叫做__proto__的内置属性，用于指向创建它的函数对象的原型对象prototype
+
 原型链的形成真正是靠__proto__ 而非prototype
 
 ```
