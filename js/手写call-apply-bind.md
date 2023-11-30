@@ -83,6 +83,17 @@ Object.prototype.toString.call(Person)
 Object.prototype.toString.call(new Set())
 //  '[object Set]'
 ```
+实现一个全局通用的数据类型判断函数
+```js
+function getType(obj) {
+  const type = typeof obj
+  if (type !== 'object' ) {
+    return type
+  }
+
+  return Object.prototype.toString.call(obj).replace(/^\[object (\S+)\]$/, '$1')
+}
+```
 
 基本数据类型（存放在栈中）
 引用数据类型。存放在堆内存中的对象
