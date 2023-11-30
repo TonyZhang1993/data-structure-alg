@@ -15,12 +15,15 @@ data-structure-alg仓库记录自己重温数据结构与算法的练习
 
 **🎯 Target : 计划是每天至少有一次练习的提交！！！FLAG 立起来！用输出的方式倒逼自己更好的学习**
 
-> 🚁 Helping Site: 
+> 💻 coding Site: 
 <br> [leetcode animation](https://github.com/TonyZhang1993/LeetCodeAnimation/tree/master)(力扣模拟理解)
 <br> [瓶子君](https://github.com/TonyZhang1993/JavaScript-Algorithms/tree/master)(涵盖各种分类&手写源码)
 <br> [算法模板](https://github.com/TonyZhang1993/algorithm-pattern/tree/master)(合理刷题)
 <br> [ssh力扣记录](https://github.com/sl1673495/leetcode-javascript/issues)(力扣分类)
-
+<br> 📚 interview Site:
+<br> [面试官系列](https://vue3js.cn/interview/)(包含vue和其他基础)
+<br> [冴羽的博客](https://github.com/mqyqingfeng/Blog)（技术好文）
+<br> [字节大佬](https://www.conardli.top/docs/JavaScript/)(算法和JS)
 
 ## JS专题
 - [手写call-apply-bind](./js/手写call-apply-bind.md)
