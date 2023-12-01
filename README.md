@@ -26,11 +26,10 @@ data-structure-alg仓库记录自己重温数据结构与算法的练习
 <br> [字节大佬](https://www.conardli.top/docs/JavaScript/)(算法和JS)
 
 ## JS专题
-- [手写call-apply-bind](./js/手写call-apply-bind.md)
-- [手写call-apply-bind](./js/手写call-apply-bind.md)
 - [闭包&this](./js/闭包-this理解.md)
 - [深/浅拷贝](./js/浅拷贝-深拷贝.md)
 - [防抖/节流](./js/手写防抖-节流.md)
+- [手写call-apply-bind](./js/手写call-apply-bind.md)
 - [new操作符](./js/new操作符.md)
 
 ## 数据结构与算法
