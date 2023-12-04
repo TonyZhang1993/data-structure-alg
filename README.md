@@ -32,6 +32,7 @@ data-structure-alg仓库记录自己重温数据结构与算法的练习
 - [防抖/节流](./js/手写防抖-节流.md)
 - [手写call-apply-bind](./js/手写call-apply-bind.md)
 - [手写instanceof](./js/手写instanceof.md)
+- [数组乱序-洗牌算法](./js/数组乱序-洗牌算法.md)
 - [数组去重-扁平-最值](./js/数组去重-扁平-最值.md)
 - [new操作符](./js/new操作符.md)
 
