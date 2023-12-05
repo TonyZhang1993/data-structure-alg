@@ -28,6 +28,7 @@ data-structure-alg仓库记录自己重温数据结构与算法的练习
 ## JS专题
 - [闭包&this](./js/闭包-this理解.md)
 - [柯里化](./js/函数柯里化.md)
+- [继承](./js/继承.md)
 - [深/浅拷贝](./js/浅拷贝-深拷贝.md)
 - [防抖/节流](./js/手写防抖-节流.md)
 - [手写call-apply-bind](./js/手写call-apply-bind.md)
