@@ -42,3 +42,6 @@ data-structure-alg仓库记录自己重温数据结构与算法的练习
 ## 剑指offer
 
 ## Leetcode
+
+## 在线运行代码
+>  [jsfiddle](https://jsfiddle.net/uh60bgp3/)、[codepen](https://codepen.io/stephanZhang/pen/NWomyEQ?editors=1111)、codesandbox
