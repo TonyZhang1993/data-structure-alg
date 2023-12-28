@@ -25,6 +25,10 @@ data-structure-alg仓库记录自己重温数据结构与算法的练习
 <br> [冴羽的博客](https://github.com/mqyqingfeng/Blog)（技术好文）
 <br> [字节大佬](https://www.conardli.top/docs/JavaScript/)(算法和JS)
 
+又是膜拜大佬的一天..
+[传送门](https://docs.qq.com/doc/DYWlaZFVmdG5veGpQ)
+
+
 ## JS专题
 - [闭包&this](./js/闭包-this理解.md)
 - [柯里化](./js/函数柯里化.md)
@@ -38,6 +42,25 @@ data-structure-alg仓库记录自己重温数据结构与算法的练习
 - [new操作符](./js/new操作符.md)
 
 ## 数据结构与算法
+
+### 数组
+- [数组集合](./dataStructure/数组.md)
+
+### 字符串
+- [字符串集合](./dataStructure/字符串.md)
+
+### 链表
+- [链表集合](./dataStructure/链表.md)
+
+### 排序
+
+- [冒泡](./algorithm/排序/冒泡排序.md)
+- [插入](./algorithm/排序/插入排序.md)
+- [选择](./algorithm/排序/选择排序.md)
+- [希尔](./algorithm/排序/希尔排序.md)
+- [快速](./algorithm/排序/快速排序.md)
+- [归并](./algorithm/排序/归并排序.md)
+- [堆排序](./algorithm/排序/堆排序.md)
 
 ## 剑指offer
 
