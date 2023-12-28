@@ -49,8 +49,26 @@ data-structure-alg仓库记录自己重温数据结构与算法的练习
 ### 字符串
 - [字符串集合](./dataStructure/字符串.md)
 
+### 栈和队列
+- [栈和队列](./dataStructure/栈和队列.md)
+
 ### 链表
 - [链表集合](./dataStructure/链表.md)
+
+### 栈和队列
+- [栈和队列](./dataStructure/栈和队列.md)
+
+### 字典和集合
+- [字典和集合](./dataStructure/字典和集合.md)
+
+### 二叉树
+- [二叉树](./dataStructure/二叉树.md)
+
+### 哈希表
+- [哈希表](./dataStructure/哈希表.md)
+
+### 堆
+- [堆](./dataStructure/堆.md)
 
 ### 排序
 
