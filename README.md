@@ -86,3 +86,8 @@ data-structure-alg仓库记录自己重温数据结构与算法的练习
 
 ## 在线运行代码
 >  [jsfiddle](https://jsfiddle.net/uh60bgp3/)、[codepen](https://codepen.io/stephanZhang/pen/NWomyEQ?editors=1111)、codesandbox
+
+## 展望
+
+23年的最后一碗鸡汤！干了！
+![Alt text](./images/人民日报.png)
