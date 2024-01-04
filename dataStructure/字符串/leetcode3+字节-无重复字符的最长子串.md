@@ -28,7 +28,7 @@
 
 ## 题解
 ```js
-//  使用数组来维护 滑动窗口
+//  使用数组来维护 滑动窗口 - 队列label
 var lengthOfLongestSubstring = function(s) {
   if (typeof s !== 'string') return -1
   if (s.length === 1) return 1
@@ -55,16 +55,17 @@ O(n)
 var lengthOfLongestSubstring = function(s) {
   if (typeof s !== 'string') return -1
   if (s.length === 1) return 1
-
+  //  使用 map 来存储当前已经遍历过的字符
   let map = new Map(), max = 0
-  //  j遍历字符串下标； i标记无重复字串起点
+  //  使用 i 来标记无重复子串开始下标，j 为当前遍历字符下标
   for (let i=0, j=0; j<s.length; j++) {
+    //  存在则更新无重复子串开始下标 i 为相同字符的下一位置
     if (map.has(s[j])) {
-      //  取最大是因为，有可能后面有重复的字符和 之前的字符匹配，但已经被标记截断就无所谓
+      //  看abba 这个例子； a 会匹配第一个a，但是此时i 大于该值，所以需要取最大值
       i = Math.max(map.get(s[j]) + 1, i)
     }
 
-    map.set(s[j], j)
+    map.set(s[j], j)  //  会覆盖之前的值
     max = Math.max(max, j - i + 1)
   }
 
@@ -73,3 +74,18 @@ var lengthOfLongestSubstring = function(s) {
 O(n)
 O(n)
 ```
+
+var lengthOfLongestSubstring = function(s) {
+  if (typeof s !== 'string') return -1
+  if (s.length === 1) return 1
+
+  let map = new Map(), max=0
+  for (let i=0, j=0; j<s.length; j++) {
+    if (map.has(s[j])) {
+      i = Math(map.get(s[j])+1, i)
+    }
+
+    map.set(s[j], j)
+    max = Math(max, j - i + 1)
+  }
+}
