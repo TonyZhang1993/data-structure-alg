@@ -55,9 +55,6 @@ data-structure-alg仓库记录自己重温数据结构与算法的练习
 ### 链表
 - [链表集合](./dataStructure/链表.md)
 
-### 栈和队列
-- [栈和队列](./dataStructure/栈和队列.md)
-
 ### 字典和集合
 - [字典和集合](./dataStructure/字典和集合.md)
 
