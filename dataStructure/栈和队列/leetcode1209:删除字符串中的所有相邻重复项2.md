@@ -30,4 +30,7 @@ var removeDuplicates = function(s, k) {
 
   return stack.join('')
 };
+
+O(n)
+O(n)
 ```
