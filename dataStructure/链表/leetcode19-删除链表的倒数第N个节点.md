@@ -2,7 +2,16 @@ https://leetcode.cn/leetbook/read/linked-list/jf1cc/
 
 ## 删除链表的倒数第N个节点
 
+说明：
+
+给定的 n 保证是有效的。
+
+进阶：
+
+你能尝试使用一趟扫描实现吗？
+
 ```js
+//  快指针先行
 /**
  * @param {ListNode} head
  * @param {number} n

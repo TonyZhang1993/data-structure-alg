@@ -48,8 +48,8 @@ var middleNode = function(head) {
     }
 
     return slow
-    
-
-
 };
+
+O(n)
+O(1)
 ```
