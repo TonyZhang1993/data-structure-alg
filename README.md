@@ -58,11 +58,11 @@ data-structure-alg仓库记录自己重温数据结构与算法的练习
 ### 字典和集合
 - [字典和集合](./dataStructure/字典和集合.md)
 
-### 二叉树
-- [二叉树](./dataStructure/二叉树.md)
-
 ### 哈希表
 - [哈希表](./dataStructure/哈希表.md)
+
+### 二叉树
+- [二叉树](./dataStructure/二叉树.md)
 
 ### 堆
 - [堆](./dataStructure/堆.md)
