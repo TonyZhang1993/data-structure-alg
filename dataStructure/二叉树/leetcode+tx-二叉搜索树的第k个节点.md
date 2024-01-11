@@ -10,6 +10,8 @@ tip: 二叉搜索树 - 在左侧储存比父节点小的值，在右侧储存比
  2   4  6   8
 ```
 
+https://leetcode.cn/problems/kth-smallest-element-in-a-bst/description/
+
 ## 思路
 二叉搜索树的`中序遍历`即排序后的节点，本题实际考察二叉树的遍历。
 
@@ -21,7 +23,7 @@ tip: 二叉搜索树 - 在左侧储存比父节点小的值，在右侧储存比
 
 
 ```js
-//  递归实现
+//  递归实现 
 function findKth(root, k) {
   let res = []
 
@@ -44,9 +46,32 @@ function findKth(root, k) {
   }
 }
 
+//  优化调整 - 不要完整得到 中序遍历结果； 可以中途截胡！！！提高效率
+//  优化后!!!!
+function findKth(root, k) {
+  let res = null
+
+  const inOrder = (node) => {
+    if (!node || k<1) return 
+
+    inOrder(node.left)
+    //  以下内容关键！！！！！！
+    if (--k === 0) {
+      res = node.val
+      return
+    }
+    inOrder(node.right)
+  }
+
+  inOrder(root)
+
+  return res
+}
+时间复杂度：O(k)
+空间复杂度：不考虑递归栈所占用的空间，空间复杂度为 O(1)
+
 //  非递归实现
 function findKth(root, k) {
-  let res = []
   let stack = []
   let cur = root
 
@@ -58,15 +83,14 @@ function findKth(root, k) {
     }
 
     cur = stack.pop()
-    res.push(cur.val)
+    //  以下内容关键！！！！！！
+    if (--k === 0) {
+      return node.val
+    }
     cur = cur.right
   }
 
-    //  注意条件
-  if (k > 0 && k <= len) {
-    return res[k - 1]
-  } else {
-    return null
-  }
+  return null
+
 }
 ```
