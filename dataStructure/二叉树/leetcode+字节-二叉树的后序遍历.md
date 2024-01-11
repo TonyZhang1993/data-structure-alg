@@ -7,6 +7,8 @@
 
 `光有前序遍历和后序遍历是无法还原二叉树的。`
 
+https://leetcode.cn/problems/binary-tree-postorder-traversal/solutions/245909/javascriptjie-er-cha-shu-de-hou-xu-bian-li-by-user/
+
 
 ## 题目
 
@@ -56,7 +58,7 @@ var postorderTraversal = function (root) {
       cur = cur.left
     }
     cur = stack[stack.length - 1]
-    //  栈顶节点的右节点为空或右节点被访问过
+    //  栈顶节点的右节点为空或右节点被访问过 !!!!**关键部分**
     if (!cur.right || cur.right === last) {
       cur = stack.pop()
       result.push(cur.val)

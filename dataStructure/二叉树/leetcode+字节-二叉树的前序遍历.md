@@ -7,6 +7,8 @@
 
 `光有前序遍历和后序遍历是无法还原二叉树的。`
 
+https://leetcode.cn/problems/binary-tree-preorder-traversal/description/
+
 
 ## 题目
 
