@@ -2,6 +2,8 @@
 
 例如输入前序遍历序列`{1,2,4,7,3,5,6,8}`和中序遍历序列`{4,7,2,1,5,3,8,6}`，则重建二叉树并返回。
 
+https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-traversal/description/
+
 ## 思路
 
 前序遍历：根节点 + 左子树前序遍历 + 右子树前序遍历
@@ -23,6 +25,7 @@
  * vin 中序排列
  */
 function reConstructBinaryTree(pre, vin) {
+  //  注意这个条件！！！！ 数组的判断条件为长度！！！
   if (pre.length === 0) return null
 
   if (pre.length === 1) return new TreeNode(pre[0])

@@ -7,7 +7,7 @@
 
 `光有前序遍历和后序遍历是无法还原二叉树的。`
 
-https://leetcode.cn/problems/binary-tree-postorder-traversal/solutions/245909/javascriptjie-er-cha-shu-de-hou-xu-bian-li-by-user/
+https://leetcode.cn/problems/binary-tree-postorder-traversal/description/
 
 
 ## 题目
