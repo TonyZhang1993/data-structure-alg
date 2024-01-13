@@ -127,7 +127,7 @@ function heapify(arr, len, i) {
 
 ```
 
-- 时间复杂度：遍历数组需要 O(n) 的时间复杂度，一次堆化需要 O(logk) 时间复杂度，所以利用堆求 Top k 问题的时间复杂度为 O(nlogk)
+- 时间复杂度：遍历数组需要 O(n) 的时间复杂度，一次堆化需要 O(logk) 时间复杂度，所以利用堆求 Top k 问题的时间复杂度为 `O(nlogk)`
 - 空间复杂度：O(k)
 
 ## 利用堆求 Top k 问题的优势
@@ -183,3 +183,4 @@ const getLeastNumbers = function(arr, k) {
 };
 O(n)
 O(n)
+```
