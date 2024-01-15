@@ -1,4 +1,4 @@
-## 题目 - TBD 
+## 题目 
 
 已知如下数组：var arr = [ [1, 2, 2], [3, 4, 5, 5], [6, 7, 8, 9, [11, 12, [12, 13, [14] ] ] ], 10];
 
@@ -29,6 +29,37 @@ const flatten_unique_sort = compose(sort, unique, flattenArr)
 // 测试
 var arr = [ [1, 2, 2], [3, 4, 5, 5], [6, 7, 8, 9, [11, 12, [12, 13, [14] ] ] ], 10]
 console.log(flatten_unique_sort(arr))
+
+
+//  tip:
+array1.reduce(
+  (accumulator, currentValue) => accumulator + currentValue,
+  initialValue,
+);
+
+accumulator
+上一次调用 callbackFn 的结果。在第一次调用时，如果指定了 initialValue 则为指定的值，否则为 array[0] 的值。
+
+currentValue
+当前元素的值。在第一次调用时，如果指定了 initialValue，则为 array[0] 的值，否则为 array[1]。
+
+
+
+--------改写， 写进一个函数里
+const flatten_unique_sort = (arr) => {
+  const flattenArr = (arr) => arr.flat(Infinity)
+
+  // 去重 Array.from(new Set(arr))
+  const unique = (arr) => [...new Set(arr)]
+
+  // 排序
+  const sort = (arr) => arr.sort((a, b) => a-b)
+
+  let rel = flattenArr(arr)
+  rel = unique(rel)
+  return sort(rel)
+}
+
 ```
 
 方法二
@@ -45,6 +76,10 @@ function newArray(arr) {
 
 
 }
+
+//  tip
+[].concat(1,2) === [].concat([1,2])  -> [1, 2]
+
 ```
 
 ```
