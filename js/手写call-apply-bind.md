@@ -232,6 +232,7 @@ Function.prototype.apply2 = function(context = window, arg) {
 }
 
 //  手写bind - TBD
+review
 /**
 1.处理参数，返回一个闭包
 2.判断是否为构造函数调用，如果是则使用new调用当前函数
