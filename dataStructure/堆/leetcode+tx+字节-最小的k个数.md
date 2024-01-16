@@ -128,7 +128,7 @@ function heapify(arr, len, i) {
 ```
 
 - 时间复杂度：遍历数组需要 O(n) 的时间复杂度，一次堆化需要 O(logk) 时间复杂度，所以利用堆求 Top k 问题的时间复杂度为 `O(nlogk)`
-- 空间复杂度：O(k)
+- 空间复杂度：`O(k)`
 
 ## 利用堆求 Top k 问题的优势
 
@@ -138,22 +138,36 @@ function heapify(arr, len, i) {
 
 这里就可以使用堆，我们可以维护一个 K 大小的小顶堆，当有数据被添加到数组中时，就将它与堆顶元素比较，如果比堆顶元素大，则将这个元素替换掉堆顶元素，然后再堆化成一个小顶堆；如果比堆顶元素小，则不做处理。这样，`每次求 Top k 问题的时间复杂度仅为 O(logk)`
 
-## 解法3 - 基于快速排序的 partition ！！！ - TBD
+## 解法3 - 基于快速排序的 partition ！！！
 ```js
+//  快排的 关键 在于先在数组中选择一个数字，接下来把数组中的数字分为两部分，比选择的数字小的数字移到数组的左边，比选择的数字大的数字移到数组的右边。[比第 k 个数字小的所有数组都位于数组的左边，比第 k 个数字大的都位于右边]
 // 定义 partition 函数，用于将数组按照枢轴分为左右两部分，并返回枢轴的索引位置
-function partition(arr, low, high) {
-    let x = arr[high]; // 将最后一个元素作为枢轴
-    let i = low - 1; // 初始化 i，表示小于枢轴的元素的最右边界
-    for (let j = low; j < high; j++) {
-        // 遍历 low 到 high-1 的元素
-        if (arr[j] <= x) {
-            // 如果当前元素小于等于枢轴
-            i++; // i 向右移动一位
-            [arr[i], arr[j]] = [arr[j], arr[i]]; // 交换 i 和 j 位置的元素
+
+/**
+ * arr 表示待分区的数组，start 表示起始索引，end 表示结束索引
+ * 实现了快速排序算法中的分区操作，用于将数组按照枢轴元素的大小进行分割
+ */
+function partition(arr, start, end) {
+    let pivot = arr[start]; // 将第一个元素作为枢轴, 小于枢轴元素的部分和大于等于枢轴元素的部分
+    //  left 表示小于枢轴元素的元素的最右边界，初始值为 start + 1；right 表示大于等于枢轴元素的元素的最左边界，初始值为 end
+    let left = start + 1; // 初始化 i，表示小于枢轴的元素的最右边界
+    let right = end
+    while (1) {
+        while (left <= end && arr[left] <= pivot) ++left;
+        while (right >= start + 1 && arr[right] >= pivot) --right;
+        //  如果 left 指针的位置大于等于 right 指针的位置，说明已经完成了一轮分区操作，此时退出循环。
+        if (left >= right) {
+            break;
         }
+        //  交换 left 和 right 指针所指向的元素，将小于枢轴元素的元素放到左边，大于等于枢轴元素的元素放到右边。然后，将 left 指针向右移动一位，将 right 指针向左移动一位
+        [arr[left], arr[right]] = [arr[right], arr[left]];
+        ++left;
+        --right;
     }
-    [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]]; // 将枢轴放到正确的位置上
-    return i + 1; // 返回枢轴的索引位置
+    //  将枢轴元素和 right 指针所指向的元素进行交换，使得枢轴元素放在正确的位置上
+    [arr[right], arr[start]] = [arr[start], arr[right]];
+    //  函数返回 right，即枢轴元素最终所在的索引
+    return right;
 }
 
 /**
@@ -166,11 +180,11 @@ const getLeastNumbers = function(arr, k) {
     if (k >= length) return arr; // 如果 k 大于等于数组长度，直接返回原数组
     let left = 0, // 左边界
         right = length - 1; // 右边界
-    let index = partition(arr, left, right); // 对整个数组进行分区操作，获取枢轴的索引位置
+    let index = partition(arr, left, right); // 对整个数组进行分区操作，获取枢轴的索引位置, 完成之后，arr 已经根据枢轴值 进行分区
     while (index !== k) {
         if (index < k) {
             // 如果枢轴的索引位置小于 k
-            left = index + 1; // 更新左边界
+            left = index + 1; // 更新左边界; 因为是以left 作为基准值；
             index = partition(arr, left, right); // 对左侧部分进行分区操作
         } else if (index > k) {
             // 如果枢轴的索引位置大于 k
