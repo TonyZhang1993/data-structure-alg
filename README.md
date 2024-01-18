@@ -74,6 +74,9 @@ data-structure-alg仓库记录自己重温数据结构与算法的练习
 ### 堆
 - [堆](./dataStructure/堆.md)
 
+### 算法
+- [算法](./algorithm/算法.md)
+
 ### 排序
 - [汇总](./algorithm/排序/README.md)
 
