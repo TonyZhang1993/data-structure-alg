@@ -1,15 +1,17 @@
 ## 知识回顾
 
 ### 基本类型
+
 |类型|typeof返回值|note|
 |:-|:-:|:-:|
-|Boolean|'boolean'|
-|String|'string'|
-|Number|'number'|
-|Undefined|'undefined'|
-|Null|*'object'*|
+|Boolean|'boolean'| |
+|String|'string'| |
+|Number|'number'| |
+|Undefined|'undefined'| |
+|Null|*'object'*| |
 |Symbol|'symbol'|生成全局唯一的值
 |BigInt|'bigint'|生成巨大的整数
+
 
 undefined 表示值的缺失，null 表示对象的缺失;（这也可以说明 typeof null === "object" 的原因）
 
