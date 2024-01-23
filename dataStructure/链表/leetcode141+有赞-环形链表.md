@@ -67,4 +67,4 @@ var hasCycle = function(head) {
 //  如果慢指针每次走m步，快指针每次走n步，只要m≠n，好像都能通过，如果在这样写下去，那么答案就无穷多了
 ```
 删除法 见证环形链表；
-![Alt text](/images/删除法见证环形链表.png)
+![Alt text](../../images/删除法见证环形链表.png)

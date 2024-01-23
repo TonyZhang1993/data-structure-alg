@@ -17,7 +17,7 @@ https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-tra
 截取左子树的前序遍历、右子树的前序遍历
 递归重建二叉树
 
-![Alt text](/images/重建二叉树.png)
+![Alt text](../../images/重建二叉树.png)
 
 ```js
 /**
