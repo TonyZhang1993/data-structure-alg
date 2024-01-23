@@ -95,6 +95,9 @@ data-structure-alg仓库记录自己重温数据结构与算法的练习
 ## 在线运行代码
 >  [jsfiddle](https://jsfiddle.net/uh60bgp3/)、[codepen](https://codepen.io/stephanZhang/pen/NWomyEQ?editors=1111)、codesandbox
 
+## 其他
+- [vue 引入图片路径的几种方式](https://blog.csdn.net/weixin_45768768/article/details/122199323)
+
 ## 展望
 
 23年的最后一碗鸡汤！干了！
