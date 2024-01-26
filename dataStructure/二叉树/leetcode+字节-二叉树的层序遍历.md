@@ -31,7 +31,7 @@ const levelOrder = (root) => {
   //  queue 存放当前层级所有的node
   let res = [], queue = [root]
 
-  while(queue.length>0) {
+  while(queue.length > 0) {
     //  cur当前层级 各 节点的值， tmp 存放当前层级节点 的 左右子节点
     let cur = [], tmp =[]
 
@@ -58,15 +58,15 @@ const levelOrder = (root) => {
 
 const levelOrder = (root) => {
   let res = []
-
+  //  depth 当前层级
   const dep = (node, depth) => {
     if (!node) return
 
     res[depth] = res[depth] || []
     res[depth].push(node.val)
 
-    dep(node.left, depth+1)
-    dep(node.right, depth+1)
+    dep(node.left, depth + 1)
+    dep(node.right, depth + 1)
   } 
 
   dep(root, 0)

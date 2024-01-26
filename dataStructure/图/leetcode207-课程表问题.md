@@ -69,7 +69,7 @@ var canFinish = function(numCourses, prerequisites) {
     numCourses--
 
     if (!adj.has(v)) continue
-
+    //  adj.get(v) 这个是一个数组，所以w 就是数组里的元素
     for(let w of adj.get(v)) {
       inDegree[w]--
       if (inDegree[w] === 0) {

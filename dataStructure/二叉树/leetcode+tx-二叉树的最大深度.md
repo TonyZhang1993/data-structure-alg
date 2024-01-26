@@ -24,7 +24,7 @@
 - 一棵二叉树的最大深度等于左子树深度和右子树最大深度的最大值 + 1
 
 ```js 
-//  递归
+//  递归 DFS
 function maxDepth(root) {
   if (!root) {
     return 0
@@ -32,6 +32,22 @@ function maxDepth(root) {
     return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1
   }
 }
+//  参照 最小深度 的写法
+var maxDepth = function(root) {
+  if (!root) return 0
+  if (!root.left && !root.right) return 1
+
+  if (!root.left) {
+    return maxDepth(root.right) + 1
+  }
+
+  if (!root.right) {
+    return maxDepth(root.left) + 1
+
+  }
+
+  return Math.max(maxDepth(root.left),maxDepth(root.right)) + 1
+};
 
 //  迭代
 function maxDepth(root) {

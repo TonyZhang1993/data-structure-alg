@@ -63,7 +63,7 @@ var postorderTraversal = function (root) {
       cur = stack.pop()
       result.push(cur.val)
       last = cur
-      cur = null // 继续弹栈
+      cur = null // 置空, 进入下一个循环, 继续弹栈
     } else {
       cur = cur.right
     }
