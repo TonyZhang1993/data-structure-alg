@@ -38,11 +38,14 @@ Solution.prototype.shuffle = function() {
 
     const len = result.length;
 
-    for(let i=len-1; i>=0; i--) { //  从0 开始也ok
+    for(let i=len-1; i>=0; i--) { //  从尾巴 开始
         let target = Math.floor((i+1) * Math.random());
         [result[i], result[target]] = [result[target], result[i]];
     }
+
     return result;
 };
+
+tip:  Math.random() 生成从0 - 1[不包含] 的随机数
 ```
 
