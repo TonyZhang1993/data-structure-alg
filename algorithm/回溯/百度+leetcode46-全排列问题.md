@@ -70,6 +70,8 @@ function permute(nums) {
 
   return res
 }
+时间复杂度： O(n*n!)
+空间复杂度：O(n)
 ```
 
 
@@ -91,25 +93,32 @@ function permuteUnique(nums) {
   nums.sort((a, b) => a - b)  //  排序，为了后面剪枝方便
 
   function backtrack(cur, visited) {
+    //  终止条件
     if (cur.length === nums.length) {
       result.push(cur.slice())
       return
     }
-
+    //  遍历选择
     for (let i=0; i<nums.length; i++) {
+      //  剪枝操作
       // 已经访问过或者与前一个数字相同且前一个数字未被访问，则跳过
       if (visited[i] || (i>0 && nums[i] === nums[i-1] && !visited[i-1])) {
         continue
       }
-
+      //  做选择
       visited[i] = true // 标记当前数字已访问
       cur.push(nums[i]) // 加入当前数字
+
       backtrack(cur, visited) // 递归处理下一个位置
+
+      //  撤销选择
       cur.pop() // 回溯
       visited[i] = false  // 取消标记
     }
   }
+  //  构建访问数组
   let visited = new Array(nums.length).fill(false)
+
   backtrack([], visited)
   return result
 }
