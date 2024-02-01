@@ -22,6 +22,7 @@ var generateParenthesis = function(n) {
     backtrack(track)
     leftSum--
     track.pop()
+    
     //  添加右括号
     track.push(')')
     rightSum++
