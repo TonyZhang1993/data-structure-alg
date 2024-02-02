@@ -10,7 +10,7 @@
 
 你可以假设 k 总是有效的，且 1 ≤ k ≤ 数组的长度。
 
-https://leetcode.cn/problems/kth-largest-element-in-an-array/description/
+[题目](https://leetcode.cn/problems/kth-largest-element-in-an-array/description/)
 
 ```js
 //  解法一：数组排序，取第 k 个数

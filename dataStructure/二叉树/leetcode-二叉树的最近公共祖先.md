@@ -1,4 +1,4 @@
-https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/description/
+[题目](https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/description/)
 
 给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。（一个节点也可以是它自己的祖先）
 

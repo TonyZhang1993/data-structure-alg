@@ -14,7 +14,8 @@
   [3,1,2],
   [3,2,1]
 ]
-附赠leetcode地址：https://leetcode.cn/problems/permutations/description/
+
+[附赠leetcode地址](https://leetcode.cn/problems/permutations/description/)
 
 ```js
 //  method1 - swap TBD

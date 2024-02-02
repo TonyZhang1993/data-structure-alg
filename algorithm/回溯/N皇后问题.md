@@ -1,4 +1,4 @@
-https://leetcode.cn/problems/n-queens/description/
+[题目](https://leetcode.cn/problems/n-queens/description/)
 
 按照国际象棋的规则，皇后可以攻击与之处在同一行或同一列或同一斜线上的棋子。
 

@@ -10,7 +10,7 @@ tip: 二叉搜索树 - 在左侧储存比父节点小的值，在右侧储存比
  2   4  6   8
 ```
 
-https://leetcode.cn/problems/kth-smallest-element-in-a-bst/description/
+[题目](https://leetcode.cn/problems/kth-smallest-element-in-a-bst/description/)
 
 ## 思路
 二叉搜索树的`中序遍历`即排序后的节点，本题实际考察二叉树的遍历。

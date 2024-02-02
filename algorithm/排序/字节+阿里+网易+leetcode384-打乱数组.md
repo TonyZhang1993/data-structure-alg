@@ -13,7 +13,7 @@ solution.shuffle();
 
 打乱一个没有重复元素的数组。
 
-https://leetcode.cn/problems/shuffle-an-array/description/
+[题目](https://leetcode.cn/problems/shuffle-an-array/description/)
 
 ```js
 /**

@@ -9,7 +9,7 @@
 输入：arr = [0,1,2,1], k = 1
 输出：[0]
 ```
-https://leetcode.cn/problems/zui-xiao-de-kge-shu-lcof/description/
+[题目](https://leetcode.cn/problems/zui-xiao-de-kge-shu-lcof/description/)
 
 ## 解法1 - 数组排序，取前 k 个数
 ```js

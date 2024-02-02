@@ -1,4 +1,4 @@
-https://leetcode.cn/leetbook/read/linked-list/jf1cc/
+[题目](https://leetcode.cn/leetbook/read/linked-list/jf1cc/)
 
 ## 删除链表的倒数第N个节点
 

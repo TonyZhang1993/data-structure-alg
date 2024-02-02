@@ -1,4 +1,4 @@
-https://leetcode.cn/problems/course-schedule/description/
+[题目](https://leetcode.cn/problems/course-schedule/description/)
 
 你这个学期必须选修 `numCourses` 门课程，记为 `0 到 numCourses - 1` 。
 

@@ -281,8 +281,7 @@ var openLock = function(deadends, target) {
 
 ### BFS 算法如何解决智力题
 
-力扣第 773 题「滑动谜题」就是这个问题
-https://leetcode.cn/problems/sliding-puzzle/
+[力扣第 773 题「滑动谜题」](https://leetcode.cn/problems/sliding-puzzle/)
 
 给你一个 2x3 的滑动拼图，用一个 2x3 的数组 board 表示。拼图中有数字 0~5 六个数，其中数字 0 就表示那个空着的格子，你可以移动其中的数字，当 board 变为 [[1,2,3],[4,5,0]] 时，赢得游戏。
 
