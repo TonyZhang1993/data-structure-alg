@@ -91,3 +91,22 @@ var maxProfit = function(prices) {
 
 
 ```
+
+其他相关题目
+[买卖股票的最佳时机含冷冻期](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown/)
+
+也就是 k 为正无穷，但含有交易冷冻期的情况
+
+额外条件： 卖出股票后，你无法在第二天买入股票 (即冷冻期为 1 天)。<br>
+解释：第 i 天选择 buy 的时候，要从 i-2 的状态转移，而不是 i-1 。
+
+
+[力扣第 714 题「买卖股票的最佳时机含手续费](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/)
+
+也就是 k 为正无穷且考虑交易手续费的情况
+
+
+[力扣第 188 题「买卖股票的最佳时机 IV](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iv/description/)
+
+即 k 可以是题目给定的任何数的情况; 和本页的第一题类似
+
