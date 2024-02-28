@@ -24,6 +24,7 @@ var longestPalindrome = function(s) {
 
   return res
 
+  // 在 s 中寻找以 s[l] 和 s[r] 为中心的最长回文串
   function palindrome(s, l, r) {
     //  边界情况
     while (l>=0 && r<s.length && s[l] === s[r]) {
