@@ -9,6 +9,8 @@
 - 创建私有变量
 - 延长变量的生命周期
 
+> 一般函数的词法环境在函数返回后就被销毁，但是闭包会保存对创建时所在词法环境的引用，即便创建时所在的执行上下文被销毁，但创建时所在词法环境依然存在，以达到延长变量的生命周期的目的
+
 ```js
 //  例子1
 function makeSizer(size) {
@@ -26,7 +28,45 @@ document.getElementById('size-14').onclick = size14;
 document.getElementById('size-16').onclick = size16;
 ```
 
-柯里化函数 
+在JavaScript中，没有支持声明私有变量，但我们可以使用闭包来模拟私有方法
+
+```js
+var makeCounter = function() {
+  var privateCounter = 0;
+  function changeBy(val) {
+    privateCounter += val;
+  }
+  return {
+    increment: function() {
+      changeBy(1);
+    },
+    decrement: function() {
+      changeBy(-1);
+    },
+    value: function() {
+      return privateCounter;
+    }
+  }
+};
+
+var Counter1 = makeCounter();
+var Counter2 = makeCounter();
+console.log(Counter1.value()); /* logs 0 */
+Counter1.increment();
+Counter1.increment();
+console.log(Counter1.value()); /* logs 2 */
+Counter1.decrement();
+console.log(Counter1.value()); /* logs 1 */
+console.log(Counter2.value()); /* logs 0 */
+//  上述通过使用闭包来定义公共函数，并令其可以访问私有函数和变量，这种方式也叫模块方式
+
+//  例如计数器、延迟调用、回调等闭包的应用，其核心思想还是创建私有变量和延长变量的生命周期
+
+//  如果不是某些特定任务需要使用闭包，在其它函数中创建函数是不明智的，因为闭包在处理速度和内存消耗方面对脚本性能具有负面影响
+
+```
+
+### 柯里化函数 
 ```js
 //  柯里化函数 - 目的在于避免频繁调用具有相同参数函数的同时，又能够轻松的重用
 // 假设我们有一个求长方形面积的函数
