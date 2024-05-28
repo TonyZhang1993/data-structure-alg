@@ -27,8 +27,8 @@ var obj = {};
 obj.__proto__ = fn.prototype;
 fn.call(obj);
 ```
-
-- instanceof: 运算符用于检测构造函数的 prototype 属性是否出现在某个实例对象的原型链上<br>
+！！！！！
+- instanceof: 运算符用于检测构造函数的 prototype 属性是否出现在某个实例对象的原型链上[instanceof只能正确判断引用数据类型]<br>
 `object instanceof constructor`
 - hasOwnProperty: 检测一个属性是存在于实例中, 不计原型链中属性
 - in: 判断实例中或者原型中是否有该属性；

@@ -10,7 +10,7 @@
 |Undefined|'undefined'| |
 |Null|*'object'*| |
 |Symbol|'symbol'|生成全局唯一的值
-|BigInt|'bigint'|生成巨大的整数
+|BigInt|'bigint'|生成任意精度格式的整数
 
 
 undefined 表示值的缺失，null 表示对象的缺失;（这也可以说明 typeof null === "object" 的原因）
@@ -45,11 +45,11 @@ const a = Symbol()
 ```
 Object 类型数据就是键值对的集合，键是一个字符串（或者 Symbol） ，值可以是任意类型的值；
 Object
-- Array
-- Date
-- RegExp
+- Array -> typeof 'object'
+- Date -> typeof 'object'
+- RegExp -> typeof 'object'
 - Function -> typeof Person === 'function'
-- Set
+- Set / Map -> typeof 'object'
 
 ```js
 //  ES6 提供了新的数据结构 Set。
@@ -76,6 +76,8 @@ Array.from(set4)
 
 ### 延伸
 ```js
+Object.prototype.toString.call(2)
+//   '[object Number]'
 Object.prototype.toString.call(new Array())
 //  '[object Array]'
 Object.prototype.toString.call(new Date())
@@ -86,6 +88,12 @@ Object.prototype.toString.call(Person)
 //  '[object Function]'
 Object.prototype.toString.call(new Set())
 //  '[object Set]'
+
+检测对象obj调用toString方法，obj.toString()的结果和Object.prototype.toString.call(obj)的结果不一样，这是为什么？
+
+toString是Object的原型方法，而Array、function等类型作为Object的实例，都重写了toString方法。
+
+采用obj.toString()不能得到其对象类型，只能将obj转换为字符串类型
 ```
 实现一个全局通用的数据类型判断函数
 ```js
