@@ -55,6 +55,11 @@ React 中最常见的问题之一是组件不必要地重新渲染。React 提�
 
 使用合成事件可以使得事件处理更加简洁和高效,  同时提供了一些额外的特性和优化,  方便开发者进行事件处理和交互操作。
 
+react17之前是绑定在document上的，17之后是绑定在#root
+ React 事件机制的一些重要特点和使用方式：
+
+合成事件：React 使用合成事件来代替原生 DOM 事件，提供了跨浏览器一致性。合成事件是 SyntheticEvent 的实例，它是对底层的原生事件的封装，并提供了与原生事件相同的属性和方法。
+
 7 组件生命周期
 1. 挂载阶段 :  由ReactDOM.render()触发---初次渲染
 - constructor() 这是创建组件时调用的第一个方法。它用于初始化状态和绑定事件处理程序。
@@ -165,6 +170,8 @@ setCount((prev) => prev + 1);
 }
 
 // on each click, value of count will update by +3
+
+setState()函数通常被认为是异步的，这意味着调用setState()时不会立刻改变react组件中state的值，setState通过触发一次组件的更新来引发重汇，多次setState函数调用产生的效果会合并，最终只执行一次渲染。
 
 14 如何在 JSX 回调中绑定方法或事件处理程序？
 
@@ -285,6 +292,10 @@ React Fiber 是 React 16 中引入的一种新的协调算法。它旨在使 Rea
 React Fiber 的工作原理是将协调过程分解为更小的工作单元,  称为纤维。纤程可以按任何顺序调度和执行,  这使得 React 可以确定工作的优先级并避免阻塞主线程。
 
 这使得 React 应用程序即使在长时间运行的任务（例如渲染大型列表或对复杂场景进行动画处理）期间也能保持响应。
+
+React16 实现了新的基于 requestIdleCallback 的调度器（因为 requestIdleCallback 兼容性和稳定性问题，自己实现了 polyfill），通过任务优先级的思想，在高优先级任务进入的时候，中断 reconciler。
+
+为了适配这种新的调度器，推出了 FiberReconciler，将原来的树形结构（vdom）转换成 Fiber 链表的形式（child/sibling/return），整个 Fiber 的遍历是基于循环而非递归，可以随时中断。
 
 18. 什么是受控组件和非受控组件？
 
@@ -757,7 +768,9 @@ React 18 还引入了一个新的Suspense功能，允许 React 延迟渲染组�
 
 - New Hooks：React 18 引入了新的 Hook，例如 useId[useId 是一个 React Hook，可以生成传递给无障碍属性的唯一 ID。
 
-]、useTransition 等，
+]、useTransition[useTransition 是一个帮助你在不阻塞 UI 的情况下更新状态的 React Hook。 例子 - 切换不同tab时，若某tab尚未加载完，也可以点击其他tab
+
+] 等，
 
 - New APIs：React 18 引入了一些新的 API，例如 createRoot、hydrateRoot 等
 
@@ -765,4 +778,105 @@ React 18 还引入了一个新的Suspense功能，允许 React 延迟渲染组�
 状态管理模式 、 不可变数据模式 、 错误边界模式 、 Context API 、 高阶组件 (HOC)：HOC 是接受组件作为参数并返回具有增强功能的新组件的函数。
 
 39 Next.js 是一个构建在 React 之上的框架，并提供服务器端渲染、静态站点生成和自动路由等附加功能。
+
+40 React v19 的新特性概览
+React 编译器：React 实现了一个新的编译器。目前，Instagram 已经在利用这项技术了。
+[
+编译器内核其实就是「旧的 AST 输入，新的 AST 输出」。在后台，编译器使用自定义代码表示和转换管道来执行语义分析。
+React19之前， 「手动记忆化」。在之前的API中,这意味着应用useMemo、useCallback和memo API来手动调整React在状态变化时重新渲染的部分。手动记忆化只是一种「权宜之计」,它会使代码变得复杂,容易出错,并需要额外的工作来保持更新
+React 将「自行决定何时以及如何改变状态并更新 UI」。
+有了这个功能，我们不再需要手动处理这个问题。这也意味着让人诟病的 useMemo()、useCallback() 和 memo要被历史的车轮无情的碾压。
+]
+服务器组件(RSC)：经过多年的开发，React 引入了服务器组件，而不是需要借助Next.js
+[react server components 是一种新的 React 技术，它允许您在服务器上渲染组件。
+Next.js 是第一个在生产环境中实现它们的。从 Next.js 13 开始，「默认情况下所有组件都是服务器组件」。要使组件在客户端运行，我们需要使用'use client'指令。
+在 React 19 中，服务器组件将直接集成到 React 中，带来了一系列优势: 数据获取 /  缓存 / 性能 / FCP / SEO
+默认情况下，React 中的所有组件都是客户端组件。只有使用 'use server' 时，组件才是服务器组件。
+]
+动作(Action)：动作也将彻底改变我们与 DOM 元素的交互方式。
+[
+这将是我们处理表单的重大变革。
+使用异步转换的函数被称为Action（动作）。Action自动管理数据的提交：
+"use server"
+
+const submitData = async (userData) => {
+    const newUser = {
+        username: userData.get('username'),
+        email: userData.get('email')
+    }
+    console.log(newUser)
+}
+const Form = () => {
+    return <form action={submitData}>
+        <div>
+            <label>用户名</label>
+            <input type="text" name='username'/>
+        </div>
+        <div>
+            <label>邮箱</label>
+            <input type="text" name="email" />
+        </div>
+        <button type='submit'>提交</button>
+    </form>
+}
+]
+文档元数据：这是另一个备受期待的改进，让我们能够用更少的代码实现更多功能。
+[
+  在做SEO时，我们需要在<meta>中处理title/keywords/description的信息。
+
+  title的权重最高，利用title提高页面权重
+  keywords相对权重较低，作为页面的辅助关键词搜索
+  description的描述一般会直接显示在搜索结果的介绍中
+
+  经常借助编写自定义代码或使用像 react-helmet[5] 这样的包来处理路由更改并相应地更新元数据。
+
+  使用 React19后，我们可以直接在 React 组件中使用<title>和 <meta> 标签：
+Const HomePage = () => {
+  return (
+    <>
+      <title>React19</title>
+      <meta name="description" content="前端柒八九" />
+      // 页面内容
+    </>
+  );
+}
+]
+资源加载：这将使资源在后台加载，从而提高应用程序的加载速度和用户体验。
+[
+  在 React 19 中，当用户浏览当前页面时，图片和其他文件将「在后台加载」。
+此外，React 还引入了用于资源加载的生命周期 Suspense，包括script、样式表和字体。这个特性使 React 能够确定内容何时准备好显示，消除了任何FOUT的闪烁现象。
+
+]
+Web Components：React 代码现在可以让我们集成 Web Components。
+[
+  有一个功能需要多项目多框架使用，那么我们可以考虑一下，将此功能用Web Components实现。
+  Web 组件允许我们使用原生 HTML、CSS 和 JavaScript 创建自定义组件，无缝地将它们整合到我们的 Web 应用程序中，就像使用HTML 标签一样。
+  虽然 WebComponents 有三个要素，但却不是缺一不可的，WebComponents
+
+    借助 shadow dom  来实现「样式隔离」，
+    借助 templates 来「简化标签」的操作。
+
+在React19之前，在 React 中集成 Web Components并不直接。通常，我们需要将 Web Components转换为 React 组件;
+React 19 将帮助我们更轻松地将 Web Components整合到我们的 React 代码中
+]
+增强的 hooks：引入了很多令人兴奋的新 hooks，将彻底改变我们的编码体验。
+[
+  在 React 19 中，我们使用 useMemo、forwardRef、useEffect 和 useContext 的方式将会改变。这主要是因为将引入一个新的 hook，即 use。
+
+  在 React19 之后，我们不再需要使用 useMemo() hook，因为 React编译器 将会自动进行记忆化。
+
+  ref 现在将作为props传递而不是使用 forwardRef() hook。
+
+React19 将引入一个新的 hook，名为 use()。这个 hook 将简化我们如何使用 promises、async 代码和 context。
+
+useFormStatus() hook
+在 React19 中，我们还有新的 hooks 来处理表单状态和数据。这将使处理表单更加流畅和简单。将这些 hooks 与 Action结合使用将使处理表单和数据更加容易。
+
+useOptimistic 也新发布的Hook，它允许我们在异步操作时显示不同的状态。
+
+]
+
+JSX 是 JavaScript 语法的扩展，它允许编写类似于 HTML 的代码
+
+
 ```
