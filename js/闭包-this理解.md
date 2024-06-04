@@ -4,6 +4,14 @@
 
 > 闭包让你可以在一个内层函数中访问到其外层函数的作用域
 
+```js
+function outer(x) {
+  return function(y) {
+    return x + y
+  }
+}
+```
+
 ### 闭包使用场景
 
 - 创建私有变量
@@ -66,6 +74,158 @@ console.log(Counter2.value()); /* logs 0 */
 
 ```
 
+### 高阶函数
+高阶函数 - 指的是能够接受函数作为参数或返回函数作为结果的函数
+```js
+// 定义接收函数的高阶函数
+function times(n, f) {
+  for (var i = 0; i < n; i++) {
+    f(i);
+  }
+}
+
+// 定义返回函数的高阶函数
+function add(x) {
+  return function(y) {
+    return x + y;
+  };
+}
+```
+
+### 闭包链式调用
+链式调用是一种编程风格，通过在对象上连续调用多个方法，使得代码看起来像是一条链条。每个方法都会返回对象本身，使得可以在同一个表达式中连续调用多个方法。如 Promise、lodash库都有体现这样的风格。
+
+```js
+function Chainable(value) {
+  // result 维护当前的运算值
+  let result = value;
+
+  this.square = function() {
+    result = Math.pow(result, 2);
+    return this;
+  };
+
+  this.cube = function() {
+    result = Math.pow(result, 3);
+    return this;
+  };
+
+  this.negate = function() {
+    result = -result;
+    return this;
+  };
+
+  this.random = function() {
+    result = Math.random() * result;
+    return this;
+  };
+
+  this.value = function() {
+    return result;
+  };
+}
+
+// 创建可链式调用对象
+const chain = new Chainable(5);
+
+const value = chain.square().cube().negate().random().value();
+console.log(value); // 示例输出：-239.40167432539412
+
+```
+
+### 闭包 发布订阅模式
+发布订阅模式是一种常见的设计模式，它用于在不同的对象之间建立松散耦合的联系。该模式包含两个核心概念：发布者（Publisher）和订阅者（Subscriber）。发布者负责发布事件和通知订阅者，而订阅者则负责订阅事件并接收通知。
+
+```js
+function eventEmitter() {
+  // events 维护各事件以及对应的订阅者
+  const events = {};
+
+  // on 函数绑定订阅者（callback）至相应的事件（eventName）
+  function on(eventName, callback) {
+    // 如果 events 不存在该事件则创建该事件并赋值一个空数组存放订阅者
+    events[eventName] = events[eventName] || [];
+    // 存入订阅者
+    events[eventName].push(callback);
+  }
+
+  // emit 函数发布事件（eventName），并传递相关参数（args）给订阅者
+  function emit(eventName, ...args) {
+    // 赋值订阅者数组
+    const callbacks = events[eventName];
+    if (callbacks) {
+      callbacks.forEach(callback => callback(...args));
+    }
+  }
+
+  // off 函数解除订阅关系
+  function off(eventName, callback) {
+    if (!callback) {
+      // 订阅者为空，直接删除事件
+      delete events[eventName];
+    } else {
+      // 订阅者不为空，筛选订阅者
+      events[eventName] = events[eventName].filter(cb => cb !== callback);
+    }
+  }
+
+  return { on, emit, off };
+}
+
+// 使用示例
+const emitter = eventEmitter();
+
+function handler1(name) {
+  console.log(`${name} says hello from handler1`);
+}
+
+function handler2(name) {
+  console.log(`${name} says hello from handler2`);
+}
+
+emitter.on('hello', handler1);
+emitter.on('hello', handler2);
+
+emitter.emit('hello', 'Alice'); // 输出 "Alice says hello from handler1" 和 "Alice says hello from handler2"
+
+emitter.off('hello', handler1);
+emitter.emit('hello', 'Bob'); // 只输出 "Bob says hello from handler2"
+
+```
+
+### 闭包缺点及解决方案
+1 内存泄露
+```js
+function outer() {
+  let count = 0;
+  
+  function inner() {
+    count++;
+    console.log(count);
+  }
+  
+  return inner;
+}
+
+// 创建闭包
+const fn = outer();
+
+// 调用多次，但没有及时解绑闭包
+fn();
+fn();
+fn();
+fn();
+// ...
+
+// 结果：count 变量无法被释放，造成内存泄漏
+
+```
+解决方案：
+将闭包函数设置为 null：fn = null;
+将闭包函数重新赋值：fn = outer();
+
+2 闭包涉及作用域链查找，性能相较直接访问局部、全局变量要低一些，在一些频繁调用或要求高性能的场景不适用
+
 ### 柯里化函数 
 ```js
 //  柯里化函数 - 目的在于避免频繁调用具有相同参数函数的同时，又能够轻松的重用
@@ -91,6 +251,31 @@ const area1 = getTenWidthArea(20)
 
 // 而且如果遇到宽度偶尔变化也可以轻松复用
 const getTwentyWidthArea = getArea(20)
+
+
+// 经典题目
+function add() {
+  // 创建空数组来维护所有要 add 的值
+  const args = []
+  // curry 函数，存入每次调用传入的参数
+  function curried(...nums) {
+    if (nums.length === 0) {
+      // 长度为0，说明调用结束，返回 args 的 sum
+      return args.reduce((pre, cur) => pre + cur, 0);
+    } else {
+      // 长度不为0，将传入的参数存入 args，返回 curried函数给下一次调用
+      args.push(...nums);
+      return curried;
+    }
+  }
+
+  // 一开始给 curried 传递 add 接收到的参数 arguments
+  return curried(...Array.from(arguments));
+}
+
+console.log(add(1, 2)(1)()); // 输出：4
+console.log(add(1)(2)(3)(4)()); // 输出：10
+console.log(add(5)()); // 输出：5
 
 ```
 
