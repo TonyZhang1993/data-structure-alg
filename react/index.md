@@ -83,7 +83,7 @@ static getDerivedStateFromError(error): 当后代组件抛出错误时,在"渲�
 componentDidCatch(error, info): 当后代组件抛出错误时,在"提交"阶段调用此方法. 它用于捕获组件树中发生的错误并执行副作用,例如记录错误. 
 
 8 React 高阶组件
-React 高阶组件(Higher Order Component,  HOC)是一种用于重用组件逻辑的高级技朮. HOC 是一个函数,  接受一个组件作为参数,  然后返回一个新的增强版组件. 通过 HOC,  可以在不改变组件原有结构的情况下,  添加额外的功能、逻辑或属性. 
+React 高阶组件(Higher Order Component,  HOC)是一种用于重用组件逻辑的高级技朮. HOC 是一个函数,  接受一个组件作为参数,  然后返回一个新的增强版组件. 通过 HOC,  可以在不改变组件原有结构的情况下,  添加额外的功能, 逻辑或属性. 
 // 定义一个 HOC
 const withLogger = (WrappedComponent) => {
   return class extends React.Component {
@@ -220,7 +220,7 @@ class MyComponent
 }
 
 15 refs 有什么用
-在 React 中,  "ref"是一个对象,  它提供了一种引用或访问特定 DOM 节点或 React 元素的方法. Refs 通常用于与 DOM 命令式交互,  例如聚焦输入、获取其尺寸或访问其方法. 
+在 React 中,  "ref"是一个对象,  它提供了一种引用或访问特定 DOM 节点或 React 元素的方法. Refs 通常用于与 DOM 命令式交互,  例如聚焦输入, 获取其尺寸或访问其方法. 
 
 当你希望组件"记住"某些信息,  但又不想让这些信息 触发新的渲染 时,  你可以使用 ref . 
 
@@ -287,7 +287,7 @@ function Form() {
 }
 
 17 React Fiber
-React Fiber 是 React 16 中引入的一种新的协调算法. 它旨在使 React 应用程序更快、更流畅,  特别是对于具有大量更新的复杂应用程序. 
+React Fiber 是 React 16 中引入的一种新的协调算法. 它旨在使 React 应用程序更快, 更流畅,  特别是对于具有大量更新的复杂应用程序. 
 
 React Fiber 的工作原理是将协调过程分解为更小的工作单元,  称为纤维. 纤程可以按任何顺序调度和执行,  这使得 React 可以确定工作的优先级并避免阻塞主线程. 
 
@@ -520,7 +520,7 @@ React Hooks 是使函数组件能够使用 React 中的状态和生命周期功�
 
 错误边界是 React 组件,它可以捕获子组件树中任何位置的 JavaScript 错误,记录这些错误,并显示后备 UI,而不是崩溃的组件树. 
 
-错误边界会在渲染期间、生命周期方法以及其下方的整个树的构造函数中捕获错误. 
+错误边界会在渲染期间, 生命周期方法以及其下方的整个树的构造函数中捕获错误. 
 
 错误边界无法捕获自身内部的错误. 
 https://zh-hans.react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary
@@ -575,7 +575,7 @@ class ErrorBoundary extends React.Component {
 
 26.react-dom包有什么用?
 
-React DOM 是一个 JavaScript 库,用于将 React 组件渲染到浏览器的(DOM). 它提供了许多与 DOM 交互的方法,例如创建元素、更新属性和删除元素. 
+React DOM 是一个 JavaScript 库,用于将 React 组件渲染到浏览器的(DOM). 它提供了许多与 DOM 交互的方法,例如创建元素, 更新属性和删除元素. 
 
 React DOM 与 React 结合使用来构建用户界面. React 使用虚拟 DOM 来跟踪 UI 的状态,React DOM 负责更新真实 DOM 以匹配虚拟 DOM. 
 //  example
@@ -588,7 +588,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 27.如何在React中使用装饰器?
 
 在 React 中,装饰器是包装组件以提供附加功能的高阶函数. 
-装饰器是 React 中的一项强大功能,它允许您向组件添加功能,而无需修改其代码. 这对于添加日志记录、性能跟踪或要应用于多个组件的其他功能非常有用. 
+装饰器是 React 中的一项强大功能,它允许您向组件添加功能,而无需修改其代码. 这对于添加日志记录, 性能跟踪或要应用于多个组件的其他功能非常有用. 
 要在 React 中使用装饰器,首先需要安装 babel-plugin-transform-decorators-legacy 包. 安装该软件包后,您需要将 .babelrc 文件添加到项目根目录中. .babelrc 文件应包含以下代码: 
 
 {
@@ -621,7 +621,7 @@ export default MyComponent;
 
 28 forceUpdate(callback?) 
 强制组件重新渲染. 
-通常来说,这是没必要的. 如果组件的 render 方法仅读取了 this.props、this.state 或 this.context 时,当你在组件或其任一父组件内调用 setState 时,它就将自动重新渲染. 但是如果组件的 render 方法是直接读取外部数据源时,则必须告诉 React 在该数据源更改时更新用户界面. 这就是 forceUpdate 的作用. 
+通常来说,这是没必要的. 如果组件的 render 方法仅读取了 this.props, this.state 或 this.context 时,当你在组件或其任一父组件内调用 setState 时,它就将自动重新渲染. 但是如果组件的 render 方法是直接读取外部数据源时,则必须告诉 React 在该数据源更改时更新用户界面. 这就是 forceUpdate 的作用. 
 
 尽量避免使用 forceUpdate 并且在 render 中尽量只读取 this.props 和 this.state. 
 `forceUpdate方法是React中类组件特有的,不能在函数式组件中使用. `
@@ -669,7 +669,7 @@ export default MyComponent;
 
 32. 优化 React App 有哪些方法?
 a)  代码分割/延迟加载/动态导入
-- 代码拆分涉及将 JavaScript 包分解为更小、更易于管理的块. 您可以根据不同的路由、组件或其他逻辑划分将其拆分为单独的文件,而不是一次性将整个应用程序代码发送到客户端. 
+- 代码拆分涉及将 JavaScript 包分解为更小, 更易于管理的块. 您可以根据不同的路由, 组件或其他逻辑划分将其拆分为单独的文件,而不是一次性将整个应用程序代码发送到客户端. 
 - 延迟加载是一种在初始页面加载时推迟非关键资源加载的策略. 
 - React.lazy 和 Suspense 形成了延迟加载依赖项并仅在需要时加载的完美方式
 
@@ -691,12 +691,12 @@ const App = () => (
   </BrowserRouter>
 )
 
-在 ReactJS 应用程序中,您可以使用 Webpack 等工具实现代码分割、延迟加载和动态导入,Webpack 为这些功能提供内置支持. 
+在 ReactJS 应用程序中,您可以使用 Webpack 等工具实现代码分割, 延迟加载和动态导入,Webpack 为这些功能提供内置支持. 
 
 动态 import() 语句异步加载模块,Webpack 会自动拆分代码并为动态导入的模块生成单独的包. 
 
 b) 服务器端渲染(SSR
-c) 优化捆绑包大小: 密切关注捆绑包大小,并通过删除未使用的依赖项、使用树摇动和最小化大型库的使用来优化它. 
+c) 优化捆绑包大小: 密切关注捆绑包大小,并通过删除未使用的依赖项, 使用树摇动和最小化大型库的使用来优化它. 
 d) React.memo() 或 PureComponent
 e) 使用 React.Fragments 或 <> </> 
 f) 节流和去抖动事件操作
@@ -716,11 +716,11 @@ const ProtectedRoute = ({ component: Component, isAuthenticated, ...rest }) => (
 );
 
 34. React 编码最佳实践
-组件组合: 将您的 UI 分解为更小的、可重用的组件
+组件组合: 将您的 UI 分解为更小的, 可重用的组件
 单一职责原则 (SRP): 每个组件都应具有单一职责
-使用函数组件: 只要有可能,就使用函数组件而不是类组件. 函数式组件更简单、更简洁、更容易推理. 使用 useState 和 useEffect 等钩子来管理功能组件中的状态和副作用. 
-避免在渲染方法中使用复杂的 JSX: 将复杂的 JSX 结构分解为更小、更易于管理的组件或辅助函数
-避免直接状态变更: 更新状态时,始终使用 React 提供的函数(例如,类组件中的 setState、功能组件中的 useState hook)以避免直接变更状态. 
+使用函数组件: 只要有可能,就使用函数组件而不是类组件. 函数式组件更简单, 更简洁, 更容易推理. 使用 useState 和 useEffect 等钩子来管理功能组件中的状态和副作用. 
+避免在渲染方法中使用复杂的 JSX: 将复杂的 JSX 结构分解为更小, 更易于管理的组件或辅助函数
+避免直接状态变更: 更新状态时,始终使用 React 提供的函数(例如,类组件中的 setState, 功能组件中的 useState hook)以避免直接变更状态. 
 优化性能: 通过最大限度地减少不必要的重新渲染
 优雅地处理错误: 实施错误边界以捕获和处理组件中的错误. ErrorBoundary
 使用 PropTypes 或 TypeScript 进行类型检查
@@ -768,24 +768,24 @@ React 18 还引入了一个新的Suspense功能,允许 React 延迟渲染组件,
 
 - New Hooks: React 18 引入了新的 Hook,例如 useId[useId 是一个 React Hook,可以生成传递给无障碍属性的唯一 ID. 
 
-]、useTransition[useTransition 是一个帮助你在不阻塞 UI 的情况下更新状态的 React Hook.  例子 - 切换不同tab时,若某tab尚未加载完,也可以点击其他tab
+], useTransition[useTransition 是一个帮助你在不阻塞 UI 的情况下更新状态的 React Hook.  例子 - 切换不同tab时,若某tab尚未加载完,也可以点击其他tab
 
 ] 等,
 
-- New APIs: React 18 引入了一些新的 API,例如 createRoot、hydrateRoot 等
+- New APIs: React 18 引入了一些新的 API,例如 createRoot, hydrateRoot 等
 
 38 react 设计模式
-状态管理模式 、 不可变数据模式 、 错误边界模式 、 Context API 、 高阶组件 (HOC): HOC 是接受组件作为参数并返回具有增强功能的新组件的函数. 
+状态管理模式 ,  不可变数据模式 ,  错误边界模式 ,  Context API ,  高阶组件 (HOC): HOC 是接受组件作为参数并返回具有增强功能的新组件的函数. 
 
-39 Next.js 是一个构建在 React 之上的框架,并提供服务器端渲染、静态站点生成和自动路由等附加功能. 
+39 Next.js 是一个构建在 React 之上的框架,并提供服务器端渲染, 静态站点生成和自动路由等附加功能. 
 
 40 React v19 的新特性概览
 React 编译器: React 实现了一个新的编译器. 目前,Instagram 已经在利用这项技术了. 
 [
 编译器内核其实就是「旧的 AST 输入,新的 AST 输出」. 在后台,编译器使用自定义代码表示和转换管道来执行语义分析. 
-React19之前, 「手动记忆化」. 在之前的API中,这意味着应用useMemo、useCallback和memo API来手动调整React在状态变化时重新渲染的部分. 手动记忆化只是一种「权宜之计」,它会使代码变得复杂,容易出错,并需要额外的工作来保持更新
+React19之前, 「手动记忆化」. 在之前的API中,这意味着应用useMemo, useCallback和memo API来手动调整React在状态变化时重新渲染的部分. 手动记忆化只是一种「权宜之计」,它会使代码变得复杂,容易出错,并需要额外的工作来保持更新
 React 将「自行决定何时以及如何改变状态并更新 UI」. 
-有了这个功能,我们不再需要手动处理这个问题. 这也意味着让人诟病的 useMemo()、useCallback() 和 memo要被历史的车轮无情的碾压. 
+有了这个功能,我们不再需要手动处理这个问题. 这也意味着让人诟病的 useMemo(), useCallback() 和 memo要被历史的车轮无情的碾压. 
 ]
 服务器组件(RSC): 经过多年的开发,React 引入了服务器组件,而不是需要借助Next.js
 [react server components 是一种新的 React 技术,它允许您在服务器上渲染组件. 
@@ -844,13 +844,13 @@ Const HomePage = () => {
 资源加载: 这将使资源在后台加载,从而提高应用程序的加载速度和用户体验. 
 [
   在 React 19 中,当用户浏览当前页面时,图片和其他文件将「在后台加载」. 
-此外,React 还引入了用于资源加载的生命周期 Suspense,包括script、样式表和字体. 这个特性使 React 能够确定内容何时准备好显示,消除了任何FOUT的闪烁现象. 
+此外,React 还引入了用于资源加载的生命周期 Suspense,包括script, 样式表和字体. 这个特性使 React 能够确定内容何时准备好显示,消除了任何FOUT的闪烁现象. 
 
 ]
 Web Components: React 代码现在可以让我们集成 Web Components. 
 [
   有一个功能需要多项目多框架使用,那么我们可以考虑一下,将此功能用Web Components实现. 
-  Web 组件允许我们使用原生 HTML、CSS 和 JavaScript 创建自定义组件,无缝地将它们整合到我们的 Web 应用程序中,就像使用HTML 标签一样. 
+  Web 组件允许我们使用原生 HTML, CSS 和 JavaScript 创建自定义组件,无缝地将它们整合到我们的 Web 应用程序中,就像使用HTML 标签一样. 
   虽然 WebComponents 有三个要素,但却不是缺一不可的,WebComponents
 
     借助 shadow dom  来实现「样式隔离」,
@@ -861,13 +861,13 @@ React 19 将帮助我们更轻松地将 Web Components整合到我们的 React �
 ]
 增强的 hooks: 引入了很多令人兴奋的新 hooks,将彻底改变我们的编码体验. 
 [
-  在 React 19 中,我们使用 useMemo、forwardRef、useEffect 和 useContext 的方式将会改变. 这主要是因为将引入一个新的 hook,即 use. 
+  在 React 19 中,我们使用 useMemo, forwardRef, useEffect 和 useContext 的方式将会改变. 这主要是因为将引入一个新的 hook,即 use. 
 
   在 React19 之后,我们不再需要使用 useMemo() hook,因为 React编译器 将会自动进行记忆化. 
 
   ref 现在将作为props传递而不是使用 forwardRef() hook. 
 
-React19 将引入一个新的 hook,名为 use(). 这个 hook 将简化我们如何使用 promises、async 代码和 context. 
+React19 将引入一个新的 hook,名为 use(). 这个 hook 将简化我们如何使用 promises, async 代码和 context. 
 
 useFormStatus() hook
 在 React19 中,我们还有新的 hooks 来处理表单状态和数据. 这将使处理表单更加流畅和简单. 将这些 hooks 与 Action结合使用将使处理表单和数据更加容易. 

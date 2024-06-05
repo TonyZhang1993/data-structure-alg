@@ -1,5 +1,5 @@
 
-给定无序、不重复的数组data,取出 n 个数,使其相加和为sum
+给定无序, 不重复的数组data,取出 n 个数,使其相加和为sum
 
 ```js
 function findSum(arr, n, sum) {

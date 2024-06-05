@@ -2,11 +2,11 @@
 1 Webpack的配置主要包括以下几个部分: 
 
 entry. 指定Webpack打包的入口文件,可以是单个或多个JavaScript文件. 这个配置决定了Webpack从哪个模块开始生成依赖关系图. 1234
-output. 设置Webpack打包后输出的目录和文件名称,包括path、filename和publicPath等. 235
+output. 设置Webpack打包后输出的目录和文件名称,包括path, filename和publicPath等. 235
 module. 配置了不同的loaders来处理不同的模块,例如,对于CSS文件,可以使用css-loader和style-loader. 2345
-resolve. 设置Webpack如何解析模块依赖,包括别名、扩展名等. 
+resolve. 设置Webpack如何解析模块依赖,包括别名, 扩展名等. 
 plugins. 使用不同的插件可以增强Webpack的功能,例如,使用html-webpack-plugin可以将打包后的js文件自动引用到HTML文件中. 
-devServer. 提供了一个简单的web服务器和实时重载功能,可以通过devServer.contentBase、devServer.port、devServer.proxy等进行配置. 
+devServer. 提供了一个简单的web服务器和实时重载功能,可以通过devServer.contentBase, devServer.port, devServer.proxy等进行配置. 
 optimization. 可以使用optimization.splitChunks和optimization.runtimeChunk配置代码拆分和运行时代码提取等优化策略. 
 externals. 用于配置排除打包的模块,例如,可以将jQuery作为外置扩展,避免将其打包到应用程序中. 
 devtool. 配置source-map类型. 
@@ -96,7 +96,7 @@ module.exports = {
 9.如何提高webpack的打包速度
 
 利用缓存: 利用Webpack的持久缓存功能,避免重复构建没有变化的代码
-使用多进程/多线程构建 : 使用thread-loader、happypack等插件可以将构建过程分解为多个进程或线程
+使用多进程/多线程构建 : 使用thread-loader, happypack等插件可以将构建过程分解为多个进程或线程
 使用DllPlugin和HardSourceWebpackPlugin:  DllPlugin可以将第三方库预先打包成单独的文件,减少构建时间. HardSourceWebpackPlugin可以缓存中间文件,加速后续构建过程
 使用Tree Shaking: 配置Webpack的Tree Shaking机制,去除未使用的代码,减小生成的文件体积
 移除不必要的插件: 移除不必要的插件和配置,避免不必要的复杂性和性能开销
@@ -108,7 +108,7 @@ Tree Shaking: 配置Webpack的Tree Shaking机制,去除未使用的代码
 压缩代码: 使用工具如UglifyJS或Terser来压缩JavaScript代码
 使用生产模式: 在Webpack中使用生产模式,通过设置mode: 'production'来启用优化
 使用压缩工具: 使用现代的压缩工具,如Brotli和Gzip,来对静态资源进行压缩
-利用CDN加速: 将项目中引用的静态资源路径修改为CDN上的路径,减少图片、字体等静态资源等打包
+利用CDN加速: 将项目中引用的静态资源路径修改为CDN上的路径,减少图片, 字体等静态资源等打包
 
 11 vite webpack 对比
 当使用 Webpack 时,所有的模块都需要在开发前进行打包,这会增加启动时间和构建时间. 
@@ -124,13 +124,13 @@ Webpack 是基于 Node.js 构建的,而 Vite 则是基于 esbuild 进行预构�
 
 预构建依赖通常指的是在项目启动或构建之前,对项目中所需的依赖项进行预先的处理或构建. 这样做的好处在于,当项目实际运行时,可以直接使用这些已经预构建好的依赖,而无需再进行实时的编译或构建,从而提高了应用程序的运行速度和效率. 
 
-(4)、热更新的处理
+(4), 热更新的处理
 
 在 Webpack 中,当一个模块或其依赖的模块内容改变时,需要重新编译这些模块. 
 
 而在 Vite 中,当某个模块内容改变时,只需要让浏览器重新请求该模块即可,这大大减少了热更新的时间. 
 
-Monorepo 是一种项目代码管理方式,指单个仓库中管理多个项目,有助于简化代码共享、版本控制、构建和部署等方面的复杂性,并提供更好的可重用性和协作性. 
+Monorepo 是一种项目代码管理方式,指单个仓库中管理多个项目,有助于简化代码共享, 版本控制, 构建和部署等方面的复杂性,并提供更好的可重用性和协作性. 
 
 优势
 ✅ 多项目代码都在一个仓库中,相同版本依赖提升到顶层只安装一次,节省磁盘内存,
@@ -214,7 +214,7 @@ Babel是一个流行的用于将新版本ES6+代码转换为向后兼容版本(E
 当 Babel 接收到源代码时,将会调用一个叫做解析器的工具,用于将源代码转换为抽象语法树(AST)
 
 - 转换
-一旦 AST 被创建,Babel 将遍历整个树形结构,对每个节点进行转换. 这些转换可以是插件、预设或手动创建的. 转换器会检查 AST 中的每个节点,然后对其进行相应的修改或替换,以将新语法转换为旧语法
+一旦 AST 被创建,Babel 将遍历整个树形结构,对每个节点进行转换. 这些转换可以是插件, 预设或手动创建的. 转换器会检查 AST 中的每个节点,然后对其进行相应的修改或替换,以将新语法转换为旧语法
 
 - 生成
 最后,Babel 将基于转换后的 AST 生成代码文本. 在这个步骤中,Babel 将遍历转换后的 AST,并创建对应的代码字符串,并将这些字符串组合成一个完整的 JavaScript 文件
@@ -223,11 +223,11 @@ Polyfill是一种用于填补浏览器或者JavaScript引擎缺失功能的代�
 
 
 CSS 工程化实践: 
-预处理器: Less、 Sass 等; 
+预处理器: Less,  Sass 等; 
 重要的工程化插件:  PostCss; 
 Webpack loader 等 . 
 
-预处理器支持我们写一种类似 CSS、但实际并不是 CSS 的语言,然后把它编译成 CSS 代码
+预处理器支持我们写一种类似 CSS, 但实际并不是 CSS 的语言,然后把它编译成 CSS 代码
 预处理器普遍会具备这样的特性: 
 -嵌套代码的能力,通过嵌套来反映不同 css 属性之间的层级关系 ; 
 -支持定义 css 变量; 

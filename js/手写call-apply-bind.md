@@ -30,7 +30,7 @@ NaN有两个特点: 一是任何涉及NaN的操作都会返回NaN,二是NaN不�
 
 BigInt 类型在 Javascript 中是一个数字的原始值,它可以表示任意大小的*整数*. 
 BigInt 是通过将 n 附加到整数末尾或调用 BigInt() 函数来创建的. 
-你可以使用大多数运算符处理 BigInt,包括 +、*、-、** 和 %. ——唯一被禁止的是 >>>. 
+你可以使用大多数运算符处理 BigInt,包括 +, *, -, ** 和 %. ——唯一被禁止的是 >>>. 
 BigInt 不能表示小数,但可以更精确地表示大整数. 
 
 `它提供了一种方法来表示大于 2^53 - 1 的整数. 这原本是 Javascript 中可以用 Number 表示的最大数字. `
@@ -91,7 +91,7 @@ Object.prototype.toString.call(new Set())
 
 检测对象obj调用toString方法,obj.toString()的结果和Object.prototype.toString.call(obj)的结果不一样,这是为什么?
 
-toString是Object的原型方法,而Array、function等类型作为Object的实例,都重写了toString方法. 
+toString是Object的原型方法,而Array, function等类型作为Object的实例,都重写了toString方法. 
 
 采用obj.toString()不能得到其对象类型,只能将obj转换为字符串类型
 ```
@@ -182,10 +182,10 @@ var obj = {
     console.log(this);
   }
 }
-1、作为对象调用时,指向该对象 obj.b(); // 指向obj
-2、作为函数调用, var b = obj.b; b(); // 指向全局window
-3、作为构造函数调用 var b = new Fun(); // this指向当前实例对象
-4、作为call与apply调用 obj.b.apply(object, []); // this指向当前的object
+1, 作为对象调用时,指向该对象 obj.b(); // 指向obj
+2, 作为函数调用, var b = obj.b; b(); // 指向全局window
+3, 作为构造函数调用 var b = new Fun(); // this指向当前实例对象
+4, 作为call与apply调用 obj.b.apply(object, []); // this指向当前的object
 ```
 
 ### apply call bind

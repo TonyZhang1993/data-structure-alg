@@ -48,13 +48,13 @@ script.src 加载的脚本内容为 JSONP: 即 PADDING(JSON) 格式
 function jsonp ({ url, onData, params }) {
   const script = document.createElement('script')
 
-  // 一、为了避免全局污染,使用一个随机函数名
+  // 一, 为了避免全局污染,使用一个随机函数名
   const cbFnName = `JSONP_PADDING_${Math.random().toString().slice(2)}`
 
-  // 二、默认 callback 函数为 cbFnName
+  // 二, 默认 callback 函数为 cbFnName
   script.src = `${url}?${stringify({ callback: cbFnName, ...params })}`
 
-  // 三、使用 onData 作为 cbFnName 回调函数,接收数据
+  // 三, 使用 onData 作为 cbFnName 回调函数,接收数据
   window[cbFnName] = onData;
 
   document.body.appendChild(script)
@@ -159,7 +159,7 @@ HttpOnly(仅HTTP):  当设置为 true 时,表示该 Cookie 不允许被 JavaScri
 
 Secure(安全):  当设置为 true 时,表示该 Cookie 只能通过 HTTPS 连接发送给服务器. 这样可以确保 Cookie 在传输过程中不被窃取. 
 
-SameSite(同站策略):  这个属性可以控制浏览器是否发送 Cookie,以防止跨站请求伪造(CSRF)攻击. 它有三个可选值: Strict、Lax 和 None. Strict 表示只有在同站请求时才发送 Cookie,Lax 则表示在某些情况下(比如从外部网站链接过来)也会发送 Cookie,而 None 表示始终发送 Cookie,无论请求来源. 
+SameSite(同站策略):  这个属性可以控制浏览器是否发送 Cookie,以防止跨站请求伪造(CSRF)攻击. 它有三个可选值: Strict, Lax 和 None. Strict 表示只有在同站请求时才发送 Cookie,Lax 则表示在某些情况下(比如从外部网站链接过来)也会发送 Cookie,而 None 表示始终发送 Cookie,无论请求来源. 
 【Lax模式比Strict模式稍微宽松一些,允许一些外部站点跳转时发送Cookie,而Strict模式则更加严格,只有在用户直接导航到目标站点时才会发送Cookie. 】
 
 主流浏览器 Same-Site 的默认值为 Lax,而在以前是 None,将会预防大部分 CSRF 攻击
@@ -325,7 +325,7 @@ defer 与 async 的区别如下:
 不同点: async 加载(fetch)完成后立即执行 (execution),因此可能会阻塞 DOM 解析; defer 加载(fetch)完成后延迟到 DOM 解析完成后才会执行(execution)**,但会在事件 DomContentLoaded 之前
 
 * DOMContentLoaded事件触发时: 仅当DOM解析完成后,不包括样式表,图片等资源. 
-当 HTML 文档完全解析,且所有延迟脚本(<script defer src="…"> 和 <script type="module">)下载和执行完毕后,会触发 DOMContentLoaded 事件. 它不会等待图片、子框架和异步脚本等其他内容完成加载. 
+当 HTML 文档完全解析,且所有延迟脚本(<script defer src="…"> 和 <script type="module">)下载和执行完毕后,会触发 DOMContentLoaded 事件. 它不会等待图片, 子框架和异步脚本等其他内容完成加载. 
 * onload 事件触发时,页面上所有的 DOM,样式表,脚本,图片等资源已经加载完毕. 
 
 document.addEventListener("DOMContentLoaded", (event) => {
@@ -361,7 +361,7 @@ window.addEventListener("popstate", function() {
 
 * pushState 和 replaceState 两个 API 来操作实现 URL 的变化 ; 
 * 我们可以使用 popstate 事件来监听 url 的变化,从而对页面进行跳转(渲染); 
-* history.pushState() 或 history.replaceState() 不会触发 popstate 事件,popstate 事件只会在在点击浏览器后退按钮或js调用forward()、back()、go()时触发
+* history.pushState() 或 history.replaceState() 不会触发 popstate 事件,popstate 事件只会在在点击浏览器后退按钮或js调用forward(), back(), go()时触发
 
 history API
 -通过 history.pushState() 跳转路由
@@ -470,9 +470,9 @@ FileReader.readAsArrayBuffer(Blob):  将Blob转为ArrayBuffer格式数据
 FileReader.readAsDataURL(Blob): 将Blob转化为Base64格式的Data URL
 
 
-ArrayBuffer 对象用来表示通用的、固定长度的原始二进制数据缓冲区
+ArrayBuffer 对象用来表示通用的, 固定长度的原始二进制数据缓冲区
 
-Object URL 又称 Blog URL; 用来表示File Object 或Blob Object 的URL;  创建一个指向 Blob 或 File 对象的可以用作图像、二进制数据下载链接等的 URL 源
+Object URL 又称 Blog URL; 用来表示File Object 或Blob Object 的URL;  创建一个指向 Blob 或 File 对象的可以用作图像, 二进制数据下载链接等的 URL 源
 window.URL.createObjectURL(new Blob([ab], {type: 'png'}))
 
 Base64 是一种基于64个可打印字符来表示二进制数据的表示方法
@@ -515,8 +515,8 @@ event loop它的执行顺序:
 * 检查是否有Web Worker任务,有则执行
 * 执行完本轮的宏任务,回到2,依此循环,直到宏任务和微任务队列都为空
 
-微任务包括: MutationObserver、Promise.then()或catch()、Promise为基础开发的其它技术,比如fetch API、V8的垃圾回收过程、Node独有的process.nextTick. 
+微任务包括: MutationObserver, Promise.then()或catch(), Promise为基础开发的其它技术,比如fetch API, V8的垃圾回收过程, Node独有的process.nextTick. 
 
-宏任务包括: script 、setTimeout、setInterval 、setImmediate 、I/O 、UI rendering. 
+宏任务包括: script , setTimeout, setInterval , setImmediate , I/O , UI rendering. 
 
 注意⚠️: 在所有任务开始的时候,由于宏任务中包括了script,所以浏览器会先执行一个宏任务,在这个过程中你看到的延迟任务(例如setTimeout)将被放到下一轮宏任务中来执行. 
