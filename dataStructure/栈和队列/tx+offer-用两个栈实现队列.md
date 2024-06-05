@@ -1,13 +1,13 @@
 ## 题目
 
-用两个栈来实现一个队列，完成队列的Push和Pop操作。 队列中的元素为int类型。
+用两个栈来实现一个队列，完成队列的Push和Pop操作.  队列中的元素为int类型. 
 
 ## 思路
 
 栈1: 用于入队列存储
 
 栈2: 出队列时将栈1的数据依次出栈，并入栈到栈2中 <br>
-栈2出栈即栈1的底部数据即队列要出的数据。
+栈2出栈即栈1的底部数据即队列要出的数据. 
 
 ![Alt text](../../images/队栈实现.png)
 
@@ -34,7 +34,7 @@ class queueWithStack() {
     if (this.stack2.length > 0) {
       return this.stack2.pop()  //  返回站顶元素
     } else {
-      return null //  队列为空返回；
+      return null //  队列为空返回; 
     }
   }
 }

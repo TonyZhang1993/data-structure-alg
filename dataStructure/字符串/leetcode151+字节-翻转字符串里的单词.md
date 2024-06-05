@@ -11,7 +11,7 @@ var reverseWords = function(s) {
 
 - 首先去除字符串左右空格
 - 逐个读取字符串中的每个单词，依次放入双端队列的对头
-- 再将队列转换成字符串输出（已空格为分隔符）
+- 再将队列转换成字符串输出(已空格为分隔符）
 
 ```js
 var reverseWords = function(s) {

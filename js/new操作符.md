@@ -1,7 +1,7 @@
 ## 知识回顾
 
 - new 通过构造函数 Person 创建出来的实例可以访问到构造函数中的属性
-- new 通过构造函数 Person 创建出来的实例可以访问到构造函数原型链中的属性（即实例与构造函数通过原型链连接了起来）
+- new 通过构造函数 Person 创建出来的实例可以访问到构造函数原型链中的属性(即实例与构造函数通过原型链连接了起来）
 
 构造函数如果返回值为一个对象，那么这个返回值会被正常使用
 ```js
@@ -31,7 +31,7 @@ fn.call(obj);
 - instanceof: 运算符用于检测构造函数的 prototype 属性是否出现在某个实例对象的原型链上[instanceof只能正确判断引用数据类型]<br>
 `object instanceof constructor`
 - hasOwnProperty: 检测一个属性是存在于实例中, 不计原型链中属性
-- in: 判断实例中或者原型中是否有该属性；
+- in: 判断实例中或者原型中是否有该属性; 
 
 ```js
 function Person() {}
@@ -43,7 +43,7 @@ Person.prototype.constructor = Person
 
 person1 instanceof Object  //true  判断Object的prototype是否出现在person1的原型链上
 person1.hasOwnProperty('name')  //true  检测一个属性是存在于实例中
-'name' in person1   //true   判断实例中或者原型中是否有该属性；
+'name' in person1   //true   判断实例中或者原型中是否有该属性; 
 ```
 
 手写new

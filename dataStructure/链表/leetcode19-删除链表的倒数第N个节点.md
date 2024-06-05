@@ -2,13 +2,13 @@
 
 ## 删除链表的倒数第N个节点
 
-说明：
+说明: 
 
-给定的 n 保证是有效的。
+给定的 n 保证是有效的. 
 
-进阶：
+进阶: 
 
-你能尝试使用一趟扫描实现吗？
+你能尝试使用一趟扫描实现吗?
 
 ```js
 //  快指针先行
@@ -29,7 +29,7 @@ var removeNthFromEnd = function(head, n) {
   while(n--) {
     fast = fast.next
   }
-  //  注意条件：直到fast为最后一个节点
+  //  注意条件: 直到fast为最后一个节点
   while (fast && fast.next) {
     fast = fast.next
     slow = slow.next

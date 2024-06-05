@@ -1,6 +1,6 @@
 [题目](https://leetcode.cn/problems/top-k-frequent-elements/description/)
 
-给定一个非空的整数数组，返回其中出现频率前 k 高的元素。
+给定一个非空的整数数组，返回其中出现频率前 k 高的元素. 
 
 ```text
 示例1
@@ -12,13 +12,13 @@
 输出: [1]
 ```
 
-- 你可以假设给定的 k 总是合理的，且 1 ≤ k ≤ 数组中不相同的元素的个数。
-- 你的算法的时间复杂度必须优于 O(nlogn) , n 是数组的大小。
-- 题目数据保证答案唯一，换句话说，数组中前 k 个高频元素的集合是唯一的。
-- 你可以按任意顺序返回答案。
+- 你可以假设给定的 k 总是合理的，且 1 ≤ k ≤ 数组中不相同的元素的个数. 
+- 你的算法的时间复杂度必须优于 O(nlogn) , n 是数组的大小. 
+- 题目数据保证答案唯一，换句话说，数组中前 k 个高频元素的集合是唯一的. 
+- 你可以按任意顺序返回答案. 
 
 
-## 解法一：map+数组
+## 解法一: map+数组
 
 ```js
 let topKFrequent = function(nums, k) {
@@ -44,7 +44,7 @@ O(n)
 要求算法的时间复杂度必须优于 O(n log n) ，**所以这种实现不合题目要求**
 ```
 
-## 解法二：map + 小顶堆
+## 解法二: map + 小顶堆
 ```js
 let topKFrequent = function(nums, k) {
     //  map 记录每个数的频率, arr 记录去重后的数组
@@ -103,8 +103,8 @@ function heaplify(heap, map, len, i) {
         heaplify(heap, map, len, min)
     }
 }
-时间复杂度：遍历数组需要 O(n) 的时间复杂度，一次堆化需要 O(logk) 时间复杂度，所以利用堆求 Top k 问题的时间复杂度为 O(nlogk)
-空间复杂度：O(n)
+时间复杂度: 遍历数组需要 O(n) 的时间复杂度，一次堆化需要 O(logk) 时间复杂度，所以利用堆求 Top k 问题的时间复杂度为 O(nlogk)
+空间复杂度: O(n)
 
 tip: 
 map.forEach((val, key) => {...}

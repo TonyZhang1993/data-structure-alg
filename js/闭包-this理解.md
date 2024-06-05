@@ -93,7 +93,7 @@ function add(x) {
 ```
 
 ### 闭包链式调用
-链式调用是一种编程风格，通过在对象上连续调用多个方法，使得代码看起来像是一条链条。每个方法都会返回对象本身，使得可以在同一个表达式中连续调用多个方法。如 Promise、lodash库都有体现这样的风格。
+链式调用是一种编程风格，通过在对象上连续调用多个方法，使得代码看起来像是一条链条. 每个方法都会返回对象本身，使得可以在同一个表达式中连续调用多个方法. 如 Promise、lodash库都有体现这样的风格. 
 
 ```js
 function Chainable(value) {
@@ -129,19 +129,19 @@ function Chainable(value) {
 const chain = new Chainable(5);
 
 const value = chain.square().cube().negate().random().value();
-console.log(value); // 示例输出：-239.40167432539412
+console.log(value); // 示例输出: -239.40167432539412
 
 ```
 
 ### 闭包 发布订阅模式
-发布订阅模式是一种常见的设计模式，它用于在不同的对象之间建立松散耦合的联系。该模式包含两个核心概念：发布者（Publisher）和订阅者（Subscriber）。发布者负责发布事件和通知订阅者，而订阅者则负责订阅事件并接收通知。
+发布订阅模式是一种常见的设计模式，它用于在不同的对象之间建立松散耦合的联系. 该模式包含两个核心概念: 发布者(Publisher）和订阅者(Subscriber）. 发布者负责发布事件和通知订阅者，而订阅者则负责订阅事件并接收通知. 
 
 ```js
 function eventEmitter() {
   // events 维护各事件以及对应的订阅者
   const events = {};
 
-  // on 函数绑定订阅者（callback）至相应的事件（eventName）
+  // on 函数绑定订阅者(callback）至相应的事件(eventName）
   function on(eventName, callback) {
     // 如果 events 不存在该事件则创建该事件并赋值一个空数组存放订阅者
     events[eventName] = events[eventName] || [];
@@ -149,7 +149,7 @@ function eventEmitter() {
     events[eventName].push(callback);
   }
 
-  // emit 函数发布事件（eventName），并传递相关参数（args）给订阅者
+  // emit 函数发布事件(eventName），并传递相关参数(args）给订阅者
   function emit(eventName, ...args) {
     // 赋值订阅者数组
     const callbacks = events[eventName];
@@ -217,12 +217,12 @@ fn();
 fn();
 // ...
 
-// 结果：count 变量无法被释放，造成内存泄漏
+// 结果: count 变量无法被释放，造成内存泄漏
 
 ```
-解决方案：
-将闭包函数设置为 null：fn = null;
-将闭包函数重新赋值：fn = outer();
+解决方案: 
+将闭包函数设置为 null: fn = null;
+将闭包函数重新赋值: fn = outer();
 
 2 闭包涉及作用域链查找，性能相较直接访问局部、全局变量要低一些，在一些频繁调用或要求高性能的场景不适用
 
@@ -273,15 +273,15 @@ function add() {
   return curried(...Array.from(arguments));
 }
 
-console.log(add(1, 2)(1)()); // 输出：4
-console.log(add(1)(2)(3)(4)()); // 输出：10
-console.log(add(5)()); // 输出：5
+console.log(add(1, 2)(1)()); // 输出: 4
+console.log(add(1)(2)(3)(4)()); // 输出: 10
+console.log(add(5)()); // 输出: 5
 
 ```
 
 ### 作用域链
 
-> 词法作用域，又叫静态作用域，变量被创建时就确定好了，而非执行阶段确定的。也就是说我们写好代码时它的作用域就确定了，JavaScript 遵循的就是词法作用域
+> 词法作用域，又叫静态作用域，变量被创建时就确定好了，而非执行阶段确定的. 也就是说我们写好代码时它的作用域就确定了，JavaScript 遵循的就是词法作用域
 
 ```js
 var a = 2;
@@ -312,7 +312,7 @@ function person() {
 person();
 ```
 
-上述代码主要主要做了以下工作：
+上述代码主要主要做了以下工作: 
 
 student函数内部属于最内层作用域，找不到name，向上一层作用域person函数内部找，找到了输出“张三”
 student内部输出sex时找不到，向上一层作用域person函数找，还找不到继续向上一层找，即全局作用域，找到了输出“男”
@@ -320,11 +320,11 @@ student内部输出sex时找不到，向上一层作用域person函数找，还�
 
 ### this
 
-> 在绝大多数情况下，函数的调用方式决定了 this 的值（运行时绑定）。this 不能在执行期间被赋值，并且在每次函数被调用时 this 的值也可能会不同。
-<br>ES5 引入了 bind 方法来设置函数的 this 值，而不用考虑函数如何被调用的。
-<br>ES2015 引入了箭头函数，箭头函数不提供自身的 this 绑定（this 的值将保持为闭合词法上下文的值）。[箭头函数内的this值继承自外围作用域。]
+> 在绝大多数情况下，函数的调用方式决定了 this 的值(运行时绑定）. this 不能在执行期间被赋值，并且在每次函数被调用时 this 的值也可能会不同. 
+<br>ES5 引入了 bind 方法来设置函数的 this 值，而不用考虑函数如何被调用的. 
+<br>ES2015 引入了箭头函数，箭头函数不提供自身的 this 绑定(this 的值将保持为闭合词法上下文的值）. [箭头函数内的this值继承自外围作用域. ]
 
-> this永远指向的是最后调用它的对象； this指的是函数运行时所在的环境。this就出现了，它的设计目的就是在函数体内部，指代函数当前的运行环境。
+> this永远指向的是最后调用它的对象;  this指的是函数运行时所在的环境. this就出现了，它的设计目的就是在函数体内部，指代函数当前的运行环境. 
 
 
 
