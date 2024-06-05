@@ -1,6 +1,6 @@
 [题目](https://leetcode.cn/problems/sort-list/description/)
 
-给你链表的头结点 head ，请将其按 升序 排列并返回 排序后的链表 . 
+给你链表的头结点 head ,请将其按 升序 排列并返回 排序后的链表 . 
 
 ```js
 /**

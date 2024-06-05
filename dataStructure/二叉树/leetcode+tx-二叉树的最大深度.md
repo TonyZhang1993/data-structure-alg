@@ -1,4 +1,4 @@
-给定一个二叉树，找出其最大深度. 
+给定一个二叉树,找出其最大深度. 
 
 二叉树的深度为根节点到最远叶子节点的最长路径上的节点数. 
 
@@ -6,7 +6,7 @@
 
 示例: 
 
-给定二叉树 `[3,9,20,null,null,15,7]，`
+给定二叉树 `[3,9,20,null,null,15,7],`
 
 ```
     3
@@ -58,7 +58,7 @@ function maxDepth(root) {
   let depth = 0
   //  还存在节点
   while(queue.length > 0) {
-    //  深度增加1，表示进入下一层
+    //  深度增加1,表示进入下一层
     depth++
     //  记录当前层的节点个数
     let levelSize = queue.length
@@ -66,7 +66,7 @@ function maxDepth(root) {
     for (let i=0; i<levelSize; i++) {
       //  弹出每个节点
       let node = queue.shift()
-      //  如果当前节点有左子节点，将左子节点入队
+      //  如果当前节点有左子节点,将左子节点入队
       if (node.left) queue.push(node.left)
       if (node.right) queue.push(node.right)
     }

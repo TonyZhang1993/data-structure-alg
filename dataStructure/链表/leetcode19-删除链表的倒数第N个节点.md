@@ -19,7 +19,7 @@
  * 
  */
 var removeNthFromEnd = function(head, n) {
-  //  创建一个节点，作为head 前置节点
+  //  创建一个节点,作为head 前置节点
   let preHead = new ListNode(0)
 
   let preHead.next = head

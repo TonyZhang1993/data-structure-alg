@@ -1,4 +1,4 @@
-数字 n 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 有效的 括号组合. 
+数字 n 代表生成括号的对数,请你设计一个函数,用于能够生成所有可能的并且 有效的 括号组合. 
 
 [题目](https://leetcode.cn/problems/generate-parentheses/solutions/426794/gua-hao-sheng-cheng-by-user7746o/)
 
@@ -40,7 +40,7 @@ var generateParenthesis = function(n) {
 const generateParenthesis = (n) => {
   const res = []
   const dfs = (path, left, right) => {
-    // 肯定不合法，提前结束
+    // 肯定不合法,提前结束
     if (left > n || left < right) return
     // 到达结束条件
     if (left + right === 2 * n) {

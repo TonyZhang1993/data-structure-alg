@@ -1,6 +1,6 @@
 ## 全排列 I
 
-给定一个 没有重复 数字的序列，返回其所有可能的全排列. 
+给定一个 没有重复 数字的序列,返回其所有可能的全排列. 
 
 示例:
 
@@ -23,18 +23,18 @@ function permute(nums) {
   let res = []
 
   const backtrack = (startIndex, nums) => {
-    // 当前排列已经完成，将结果加入到结果数组中
+    // 当前排列已经完成,将结果加入到结果数组中
     if (startIndex === nums.length - 1) {
       res.push([...nums])
       return
     }
 
     for (let i=startIndex; i<nums.length; i++) {
-      // 将当前元素与后面的元素依次交换位置，生成新的排列
+      // 将当前元素与后面的元素依次交换位置,生成新的排列
       [nums[startIndex], nums[i]] = [nums[i], nums[startIndex]];
-      // 递归调用，生成下一个位置的排列
+      // 递归调用,生成下一个位置的排列
       backtrack(startIndex+1, nums);
-      // 恢复原数组，进行回溯
+      // 恢复原数组,进行回溯
       [nums[startIndex], nums[i]] = [nums[i], nums[startIndex]]
 
     }
@@ -78,7 +78,7 @@ function permute(nums) {
 
 ## 全排列 II
 
-给定一个可包含重复数字的序列 nums ，按任意顺序 返回所有不重复的全排列. 
+给定一个可包含重复数字的序列 nums ,按任意顺序 返回所有不重复的全排列. 
 
 ```js
 输入: nums = [1,1,2]
@@ -91,7 +91,7 @@ function permute(nums) {
 ```js
 function permuteUnique(nums) {
   const result = []
-  nums.sort((a, b) => a - b)  //  排序，为了后面剪枝方便
+  nums.sort((a, b) => a - b)  //  排序,为了后面剪枝方便
 
   function backtrack(cur, visited) {
     //  终止条件
@@ -102,7 +102,7 @@ function permuteUnique(nums) {
     //  遍历选择
     for (let i=0; i<nums.length; i++) {
       //  剪枝操作
-      // 已经访问过或者与前一个数字相同且前一个数字未被访问，则跳过
+      // 已经访问过或者与前一个数字相同且前一个数字未被访问,则跳过
       if (visited[i] || (i>0 && nums[i] === nums[i-1] && !visited[i-1])) {
         continue
       }
@@ -131,5 +131,5 @@ if (vis[i] || (i > 0 && nums[i] == nums[i - 1] && !vis[i - 1])) {
       continue;
 }
 
-举个栗子，对于两个相同的数11，我们将其命名为1a1b, 1a表示第一个1，1b表示第二个1;  那么，不做去重的话，会有两种重复排列 1a1b, 1b1a， 我们只需要取其中任意一种排列;  为了达到这个目的，限制一下1a, 1b访问顺序即可.  比如我们只取1a1b那个排列的话，只有当visit nums[i-1]之后我们才去visit nums[i]， 也就是如果!visited[i-1]的话则continue
+举个栗子,对于两个相同的数11,我们将其命名为1a1b, 1a表示第一个1,1b表示第二个1;  那么,不做去重的话,会有两种重复排列 1a1b, 1b1a, 我们只需要取其中任意一种排列;  为了达到这个目的,限制一下1a, 1b访问顺序即可.  比如我们只取1a1b那个排列的话,只有当visit nums[i-1]之后我们才去visit nums[i], 也就是如果!visited[i-1]的话则continue
 ```

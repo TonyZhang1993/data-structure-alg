@@ -21,7 +21,7 @@ var longestCommonPrefix = function(strs) {
   return prev
 }
 
-//  拿首个，进行比较，不断缩减长度查看
+//  拿首个,进行比较,不断缩减长度查看
 var longestCommonPrefix = function(strs) {
     let prev = strs[0]
     if (strs.length === 1) return strs[0]

@@ -2,7 +2,7 @@
 
 - 参考最长回文子串
 
-转换一下，统计个数即可
+转换一下,统计个数即可
 
 ```JS
 var countSubstrings = function(s) {

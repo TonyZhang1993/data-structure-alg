@@ -1,7 +1,7 @@
 [题目](https://leetcode.cn/problems/binary-tree-level-order-traversal/)
 
 ## 题目
-给你二叉树的根节点 root ，返回其节点值的 层序遍历 .  (即逐层地，从左到右访问所有节点）. 
+给你二叉树的根节点 root ,返回其节点值的 层序遍历 .  (即逐层地,从左到右访问所有节点). 
 
 ```
     3
@@ -19,10 +19,10 @@
 ```
 
 ```js
-//  解法一: BFS(广度优先遍历）
+//  解法一: BFS(广度优先遍历)
 
-// BFS 是按层层推进的方式，遍历每一层的节点. 题目要求的是返回每一层的节点值，所以这题用 BFS 来做非常合适. 
-// BFS 需要用队列作为辅助结构，我们先将根节点放到队列中，然后不断遍历队列. 
+// BFS 是按层层推进的方式,遍历每一层的节点. 题目要求的是返回每一层的节点值,所以这题用 BFS 来做非常合适. 
+// BFS 需要用队列作为辅助结构,我们先将根节点放到队列中,然后不断遍历队列. 
 
 const levelOrder = (root) => {
   if (!root) {
@@ -32,7 +32,7 @@ const levelOrder = (root) => {
   let res = [], queue = [root]
 
   while(queue.length > 0) {
-    //  cur当前层级 各 节点的值， tmp 存放当前层级节点 的 左右子节点
+    //  cur当前层级 各 节点的值, tmp 存放当前层级节点 的 左右子节点
     let cur = [], tmp =[]
 
     while(queue.length>0) {
@@ -40,7 +40,7 @@ const levelOrder = (root) => {
       let node = queue.shift()
       //  记录值
       cur.push(node.val)
-      //  若有左右子树，推入tmp中
+      //  若有左右子树,推入tmp中
       if (node.left) tmp.push(node.left)
       if (node.right) tmp.push(node.right)
     }
