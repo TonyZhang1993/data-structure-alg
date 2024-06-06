@@ -74,18 +74,3 @@ var lengthOfLongestSubstring = function(s) {
 O(n)
 O(n)
 ```
-
-var lengthOfLongestSubstring = function(s) {
-  if (typeof s !== 'string') return -1
-  if (s.length === 1) return 1
-
-  let map = new Map(), max=0
-  for (let i=0, j=0; j<s.length; j++) {
-    if (map.has(s[j])) {
-      i = Math(map.get(s[j])+1, i)
-    }
-
-    map.set(s[j], j)
-    max = Math(max, j - i + 1)
-  }
-}

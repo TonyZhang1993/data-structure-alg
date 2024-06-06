@@ -53,9 +53,9 @@ function mynew(func, ...args) {
   var obj = {}
   // 2.新对象原型指向构造函数原型对象
   obj.__proto__ = func.prototype
-  // 3.将构建函数的this指向新对象
-  const result = func.apply(func, args)  //  args 为数组
-  // 4.根据返回值判断
+  // 3. 将这个新对象作为 this 上下文, 并调用构造函数  
+  const result = func.apply(obj, args)  //  args 为数组
+  // 4. 如果构造函数返回的是一个对象, 则返回这个对象；否则返回新创建的对象  
   return result instanceof Object ? result : obj
 }
 

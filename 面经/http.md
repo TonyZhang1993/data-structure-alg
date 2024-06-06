@@ -124,4 +124,31 @@ Location, Server, Content-Encoding, Content-Length, Content-Type, Refresh, Conte
 1. 永远不要信任用户的输入. 对用户的输入进行校验,可以通过正则表达式,或限制长度; 对单引号和双"-"进行转换等. 
 
 
+
+Cookie: 存储在客户端的浏览器中. 它主要用于存储用户的身份认证, 会话状态等信息. Cookie的大小通常受到浏览器和服务器的限制, 一般不超过4KB. 每次向同一个域名下发送请求时, 都会携带相同的Cookie, 这样服务器就能识别客户端的身份信息. 
+
+IndexedDB: IndexedDB是一种浏览器本地数据库, 可以在客户端浏览器中存储大量的结构化数据. 它支持事务操作, 索引查询等功能, 存储空间相对较大, 通常限制为几百MB到几GB. 与Web Storage相比, IndexedDB的存储方式更为复杂, 但提供了更强大的数据操作能力. 
+
+
+如何实现浏览器内 多标签通信
+
+1 使用localStorage事件:  localStorage API 提供了在多个标签页之间共享数据的能力, 并且通过监听 storage 事件
+// 在一个标签页中设置localStorage  
+localStorage.setItem('key', 'value');  
+ 
+// 在另一个标签页中监听storage事件  
+window.addEventListener('storage', function(event) {  
+    if (event.key === 'key') {  
+        console.log('Value changed to:', event.newValue);  
+    }  
+});
+//  storage 事件只会在其他标签页(或窗口)修改 localStorage 时触发, 而且不会在当前触发修改的标签页中触发. 
+
+2 使用Service Workers:  Service Workers 是一种在浏览器后台独立于网页运行的脚本, 它们可以用来接收推送通知, 管理缓存等. 
+- 注册 Service Worker:  在页面中注册一个 Service Worker. 
+- 在 Service Worker 中监听消息:  在 Service Worker 脚本中监听来自页面的消息, 并将这些消息广播到所有页面. 
+- 在页面中发送和接收消息:  在页面中发送消息给 Service Worker, 并在其他页面中监听来自 Service Worker 的消息. 
+
 ```
+
+![alt text](image.png)
