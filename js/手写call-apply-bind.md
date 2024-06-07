@@ -34,13 +34,15 @@ BigInt 是通过将 n 附加到整数末尾或调用 BigInt() 函数来创建的
 BigInt 不能表示小数,但可以更精确地表示大整数. 
 
 `它提供了一种方法来表示大于 2^53 - 1 的整数. 这原本是 Javascript 中可以用 Number 表示的最大数字. `
-```
+
+```js
 const x = BigInt(1928989289894) //  另外一种写法:  7975n
 x + 1n === x + 2n //  false
 ```
 
 Symbol 是唯一并且不可变的原始值并且可以用来作为对象属性的键
-```
+
+```js
 const a = Symbol()
 ```
 Object 类型数据就是键值对的集合,键是一个字符串(或者 Symbol) ,值可以是任意类型的值; 
@@ -114,7 +116,8 @@ reference: [基本类型](https://developer.mozilla.org/zh-CN/docs/Web/JavaScrip
 
 
 ### 函数对象
-```
+
+```js
 普通对象Object 和 函数对象Function
 
 凡是通过 new Function() 创建的对象都是函数对象,其他的都是普通对象. 
@@ -138,6 +141,7 @@ JS在创建对象(不论是普通对象还是函数对象)的时候,都有一个
 ### 原型&原型链
 ![Alt text](../images/image-1.png)
 ![Alt text](../images/image-2.png)
+
 ```js
 function Person() {
 
@@ -162,7 +166,7 @@ person.name //  'Kevin'
 
 ```
 
-```
+```js
 知识点: 
 - __proto__然而它并不存在于 Person.prototype 中
 实际上,它是来自于 Object.prototype ,与其说是一个属性,不如说是一个 getter/setter,当使用 obj.__proto__ 时,可以理解成返回了 Object.getPrototypeOf(obj). 
@@ -175,7 +179,7 @@ reference: [JavaScript深入之从原型到原型链
 ](https://github.com/mqyqingfeng/Blog/issues/2)
 
 ### this调用场景
-```
+```js
 var obj = {
   a: 1, 
   b: function() {
@@ -265,6 +269,7 @@ Function.prototype.bind = function (context, ...args1) {
 ```
 > 知识点:  类数组对象与arguments 
 <br>类数组对象: 拥有一个 length 属性和若干索引属性的对象
+
 ```js
 var arrayLike = {
     0: 'name',
