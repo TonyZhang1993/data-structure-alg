@@ -21,7 +21,7 @@ HTML4 中, 元素被分成两大类: inline (内联元素)与 block(块级元素
 常见的行内元素有 a b span img strong sub sup button input label select textarea
 行内元素只能包含文本和其他行内元素. 而块级元素可以包含行内元素和其他块级元素. 
 
-块级元素占据其父元素(容器)的整个宽度, 因此创建了一个"块”. 
+块级元素占据其父元素(容器)的整个宽度, 因此创建了一个"块". 
 常见的块级元素有  div ul ol li dl dt dd h1 h2 h3 h4 h5 h6 p 
 
 区别 - 
@@ -436,13 +436,13 @@ JSONP, 详解见 JSONP 的原理是什么, 如何实现
 
 
 
-什么是"技术知识”？知识就是 I KNOW
+什么是"技术知识"？知识就是 I KNOW
 
 《TypeScript 从入门到放弃》
 《React 从入门到放弃》
 《Webpack 从入门到放弃》
 ......
-什么是"技术能力”？能力就是 I CAN
+什么是"技术能力"？能力就是 I CAN
 
 我用 TypeScript 重构了一个大型系统, 代码健壮性及研发效率大幅提升. 
 我用 React Hooks 给全栈同学进行前端培训, 培训效果大幅提升. 

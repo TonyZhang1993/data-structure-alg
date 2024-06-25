@@ -26,7 +26,7 @@ Target - 2 css
 
 
 伪类用于当已有的元素处于某个状态时, 为其添加对应的样式, 
-伪类比如p:active, p:hover都是指元素p的一个"状态” 【active focus hover link visited first-child】
+伪类比如p:active, p:hover都是指元素p的一个"状态" 【active focus hover link visited first-child】
 而伪元素的效果则需要通过添加一个实际的元素才能达到 [after before first-letter]
 伪元素用于创建一些不在文档树中的元素, 并为其添加样式. 
 
@@ -119,7 +119,7 @@ inherit
 规定从父元素继承position属性的值. 
 
 CSS3 新特性 
-新增各种CSS选择器	(:not(.input): 所有class不是"input”的节点)
+新增各种CSS选择器	(:not(.input): 所有class不是"input"的节点)
 圆角		(border-radius:8px)
 文字特效		(text-shadow) text-shadow: h-shadow v-shadow blur-radius color|none|initial|inherit;
 
@@ -204,11 +204,11 @@ display: flex; flex: 1;自动拉伸以填充可用空间
 淘宝的样式初始化代码: 对不同标签, 有不同的初始化代码
 
 包含块(containing block)就是元素用来计算和定位的一个框. 
-(1)根元素(很多场景下可以看成是<html>)被称为"初始包含块”, 其尺寸等同于浏览器可视窗口的大小. 
-(2)对于其他元素, 如果该元素的position是relative或者static, 则"包含块”由其最近的块容器祖先盒的content box
+(1)根元素(很多场景下可以看成是<html>)被称为"初始包含块", 其尺寸等同于浏览器可视窗口的大小. 
+(2)对于其他元素, 如果该元素的position是relative或者static, 则"包含块"由其最近的块容器祖先盒的content box
 边界形成. 
-(3)如果元素position:fixed, 则"包含块”是"初始包含块”. 
-(4)如果元素position:absolute, 则"包含块”由最近的position不为static的祖先元素建立
+(3)如果元素position:fixed, 则"包含块"是"初始包含块". 
+(4)如果元素position:absolute, 则"包含块"由最近的position不为static的祖先元素建立
 
 CSS 里的 visibility 属性有个 collapse 属性值是干嘛用的？在不同浏览器下以后什么区别？
 (1)对于一般的元素, 它的表现跟visibility: hidden;是一样的. 元素是不可见的, 但此时仍占用页面空间. 
