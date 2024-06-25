@@ -245,7 +245,7 @@ css-loader: 导入 CSS 模块,对 CSS 代码进行编译处理;
 style-loader: 创建style标签,把 CSS 内容写入标签. 
 
 
-// 设置一个钩子，在 npm install 后自动执行，此处有可能不是必须的
+// 设置一个钩子, 在 npm install 后自动执行, 此处有可能不是必须的
 "prepare": "husky install"        "preinstall": "npx -y only-allow pnpm",
 
 ```

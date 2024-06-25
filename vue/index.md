@@ -376,7 +376,7 @@ export default {
 
 
 ### 虚拟DOM
-虚拟DOM是一个对象，一个用来表示真实DOM的对象
+虚拟DOM是一个对象, 一个用来表示真实DOM的对象
 
 <ul id="list">
     <li class="item">哈哈</li>
@@ -384,7 +384,7 @@ export default {
     <li class="item">嘿嘿</li>
 </ul>
 
-//  对应的虚拟DOM为：
+//  对应的虚拟DOM为: 
 let oldVDOM = { // 旧虚拟DOM
         tagName: 'ul', // 标签名
         props: { // 标签属性
@@ -403,21 +403,21 @@ let oldVDOM = { // 旧虚拟DOM
         ]
     }
 
-虚拟DOM比真实DOM快这句话其实是错的，或者说是不严谨的。那正确的说法是什么呢？
+虚拟DOM比真实DOM快这句话其实是错的, 或者说是不严谨的. 那正确的说法是什么呢？
 
-虚拟DOM算法操作真实DOM，性能高于直接操作真实DOM，虚拟DOM和虚拟DOM算法是两种概念。虚拟DOM算法 = 虚拟DOM + Diff算法
+虚拟DOM算法操作真实DOM, 性能高于直接操作真实DOM, 虚拟DOM和虚拟DOM算法是两种概念. 虚拟DOM算法 = 虚拟DOM + Diff算法
 
-Diff算法是一种对比算法。对比两者是旧虚拟DOM和新虚拟DOM，对比出是哪个虚拟节点更改了，找出这个虚拟节点，并只更新这个虚拟节点所对应的真实节点，而不用更新其他数据没发生改变的节点，实现精准地更新真实DOM，进而提高效率。
+Diff算法是一种对比算法. 对比两者是旧虚拟DOM和新虚拟DOM, 对比出是哪个虚拟节点更改了, 找出这个虚拟节点, 并只更新这个虚拟节点所对应的真实节点, 而不用更新其他数据没发生改变的节点, 实现精准地更新真实DOM, 进而提高效率. 
 
-Diff算法比较只会在同层级进行, 不会跨层级比较。所以Diff算法是:广度优先算法。 时间复杂度:O(n)
+Diff算法比较只会在同层级进行, 不会跨层级比较. 所以Diff算法是:广度优先算法.  时间复杂度:O(n)
 
 ### Diff 算法
 
 patch方法
-这个方法作用就是，对比当前同层的虚拟节点是否为同一种类型的标签sameVnode方法(同一类型的标准，下面会讲)：
+这个方法作用就是, 对比当前同层的虚拟节点是否为同一种类型的标签sameVnode方法(同一类型的标准, 下面会讲): 
 
-是：继续执行patchVnode方法进行深层比对
-否：没必要比对了，直接整个节点替换成新虚拟节点
+是: 继续执行patchVnode方法进行深层比对
+否: 没必要比对了, 直接整个节点替换成新虚拟节点
 
 function sameVnode(oldVnode, newVnode) {
   return (
@@ -425,34 +425,34 @@ function sameVnode(oldVnode, newVnode) {
     oldVnode.tagName === newVnode.tagName && // 标签名是否一样
     oldVnode.isComment === newVnode.isComment && // 是否都为注释节点
     isDef(oldVnode.data) === isDef(newVnode.data) && // 是否都定义了data
-    sameInputType(oldVnode, newVnode) // 当标签为input时，type必须是否相同
+    sameInputType(oldVnode, newVnode) // 当标签为input时, type必须是否相同
   )
 }
 
 
 patchVnode方法
-这个函数做了以下事情：
+这个函数做了以下事情: 
 
-找到对应的真实DOM，称为el
-判断newVnode和oldVnode是否指向同一个对象，如果是，那么直接return
-如果他们都有文本节点并且不相等，那么将el的文本节点设置为newVnode的文本节点。
-如果oldVnode有子节点而newVnode没有，则删除el的子节点
-如果oldVnode没有子节点而newVnode有，则将newVnode的子节点真实化之后添加到el
-如果两者都有子节点，则执行updateChildren函数比较子节点，这一步很重要
+找到对应的真实DOM, 称为el
+判断newVnode和oldVnode是否指向同一个对象, 如果是, 那么直接return
+如果他们都有文本节点并且不相等, 那么将el的文本节点设置为newVnode的文本节点. 
+如果oldVnode有子节点而newVnode没有, 则删除el的子节点
+如果oldVnode没有子节点而newVnode有, 则将newVnode的子节点真实化之后添加到el
+如果两者都有子节点, 则执行updateChildren函数比较子节点, 这一步很重要
 
 updateChildren方法
-总共有五种比较情况：
+总共有五种比较情况: 
 
-1、oldS 和 newS使用sameVnode方法进行比较，sameVnode(oldS, newS)
-2、oldS 和 newE使用sameVnode方法进行比较，sameVnode(oldS, newE)
-3、oldE 和 newS使用sameVnode方法进行比较，sameVnode(oldE, newS)
-4、oldE 和 newE使用sameVnode方法进行比较，sameVnode(oldE, newE)
-5、如果以上逻辑都匹配不到，再把所有旧子节点的 key 做一个映射到旧节点下标的 key -> index 表，然后用新 vnode 的 key 去找出在旧节点中可以复用的位置。
+1, oldS 和 newS使用sameVnode方法进行比较, sameVnode(oldS, newS)
+2, oldS 和 newE使用sameVnode方法进行比较, sameVnode(oldS, newE)
+3, oldE 和 newS使用sameVnode方法进行比较, sameVnode(oldE, newS)
+4, oldE 和 newE使用sameVnode方法进行比较, sameVnode(oldE, newE)
+5, 如果以上逻辑都匹配不到, 再把所有旧子节点的 key 做一个映射到旧节点下标的 key -> index 表, 然后用新 vnode 的 key 去找出在旧节点中可以复用的位置. 
 
 参考 - https://mp.weixin.qq.com/s/kjUhjliSHFLX52zYKUkNaA
 
 
-### 平常v-for循环渲染的时候，为什么不建议用index作为循环项的key呢？
+### 平常v-for循环渲染的时候, 为什么不建议用index作为循环项的key呢？
 <ul>                      <ul>
     <li key="0">a</li>        <li key="0">林三心</li>
     <li key="1">b</li>        <li key="1">a</li>
@@ -460,9 +460,9 @@ updateChildren方法
                               <li key="3">c</li>
 </ul>                     </ul>
 
-在进行子节点的 diff算法 过程中，会进行 旧首节点和新首节点的sameNode对比，这一步命中了逻辑，因为现在新旧两次首部节点 的 key 都是 0了，同理，key为1和2的也是命中了逻辑，导致相同key的节点会去进行patchVnode更新文本，
-而原本就有的c节点，却因为之前没有key为4的节点，而被当做了新节点，所以很搞笑，使用index做key，最后新增的居然是本来就已有的c节点。
-所以前三个都进行patchVnode更新文本，最后一个进行了新增，那就解释了为什么所有li标签都更新了。
+在进行子节点的 diff算法 过程中, 会进行 旧首节点和新首节点的sameNode对比, 这一步命中了逻辑, 因为现在新旧两次首部节点 的 key 都是 0了, 同理, key为1和2的也是命中了逻辑, 导致相同key的节点会去进行patchVnode更新文本, 
+而原本就有的c节点, 却因为之前没有key为4的节点, 而被当做了新节点, 所以很搞笑, 使用index做key, 最后新增的居然是本来就已有的c节点. 
+所以前三个都进行patchVnode更新文本, 最后一个进行了新增, 那就解释了为什么所有li标签都更新了. 
 
 解决方案-使用一个独一无二的值来当做key
 ```

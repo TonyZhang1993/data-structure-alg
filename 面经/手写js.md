@@ -558,12 +558,12 @@ https://mp.weixin.qq.com/s/w5RF1LKkX1F77CQQgR4pnA
         output.innerText = value;
       }
     });
-优点：
-兼容性好，支持 IE9，而 Proxy 的存在浏览器兼容性问题,而且无法用 polyfill 磨平
-缺点：
+优点: 
+兼容性好, 支持 IE9, 而 Proxy 的存在浏览器兼容性问题,而且无法用 polyfill 磨平
+缺点: 
 检测不到对象属性的添加和删除
 数组API方法无法监听到
-需要对每个属性进行遍历监听，如果嵌套对象，需要深层监听，造成性能问题
+需要对每个属性进行遍历监听, 如果嵌套对象, 需要深层监听, 造成性能问题
 
 
   //  proxy实现
@@ -591,8 +591,8 @@ https://mp.weixin.qq.com/s/w5RF1LKkX1F77CQQgR4pnA
     input.addEventListener('input', function() {
       data.message = input.value;
     });
-缺点：
-Proxy 不兼容IE，也没有 polyfill, defineProperty 能支持到IE9
+缺点: 
+Proxy 不兼容IE, 也没有 polyfill, defineProperty 能支持到IE9
 
 ```
 
