@@ -40,7 +40,7 @@ Object.entries(
 
 
 -----补充
-不同的是querySelector返回的是一个对象，querySelectorAll返回的一个集合(NodeList)。
+不同的是querySelector返回的是一个对象, querySelectorAll返回的一个集合(NodeList). 
 获取页面ID属性为test的元素：
 1. document.getElementById("test");
 2. //or
@@ -53,27 +53,27 @@ Object.entries(
 4. //or
 5. document.querySelectorAll('.red')
 
-querySelector() 方法仅仅返回匹配指定选择器的第一个元素。如果你需要返回所有的元素，请使用 querySelectorAll() 方法替代。
+querySelector() 方法仅仅返回匹配指定选择器的第一个元素. 如果你需要返回所有的元素, 请使用 querySelectorAll() 方法替代. 
 
-querySelectorAll 返回的是一个 Static Node List，而 getElementsBy 系列的返回的是一个 Live Node List。
+querySelectorAll 返回的是一个 Static Node List, 而 getElementsBy 系列的返回的是一个 Live Node List. 
 动态集合选出的元素会随文档改变而改变
 
-如果查找元素次数不多的话尽量使用getElementBy系列方法（因为性能高）。
-如果查找元素次数比较多的话就使用querySelector方法（因为方便
+如果查找元素次数不多的话尽量使用getElementBy系列方法(因为性能高). 
+如果查找元素次数比较多的话就使用querySelector方法(因为方便
 
-伪数组是什么呢，当然它也是对象，伪数组一般具有以下特点：
+伪数组是什么呢, 当然它也是对象, 伪数组一般具有以下特点：
 * 按索引方式存储数据；
 * 具有length属性；
 * 没有数组的push、shift、pop等方法;
-比较特别的是function内的arguments对象，还有像调用 getElementsByTagName, document.childNodes之类的，它们都返回的NodeList对象都属于伪数组，也称为类数组，还有自定义的对象，也属于伪数组。我们可以通过Array.prototype.slice.call(fakeArray)将伪数组转变为真正的Array对象。
+比较特别的是function内的arguments对象, 还有像调用 getElementsByTagName, document.childNodes之类的, 它们都返回的NodeList对象都属于伪数组, 也称为类数组, 还有自定义的对象, 也属于伪数组. 我们可以通过Array.prototype.slice.call(fakeArray)将伪数组转变为真正的Array对象. 
 
 返回方式:
-NodeList: 通常由 DOM 方法（如 querySelectorAll()）返回，表示一组节点列表，不仅限于 HTML 元素，还包括文档节点、注释节点等。
-HTMLCollection: 由一些 DOM 属性（如 childNodes、getElementsByTagName()、getElementsByClassName()）返回，仅包含文档中具体的 HTML 元素节点。
+NodeList: 通常由 DOM 方法(如 querySelectorAll())返回, 表示一组节点列表, 不仅限于 HTML 元素, 还包括文档节点、注释节点等. 
+HTMLCollection: 由一些 DOM 属性(如 childNodes、getElementsByTagName()、getElementsByClassName())返回, 仅包含文档中具体的 HTML 元素节点. 
 
 实时性:
-NodeList: 通常是静态的，不会随 DOM 的修改而自动更新。这意味着，如果在获取 NodeList 后，DOM 结构发生了变化（如添加或删除了匹配的节点），NodeList 不会自动反映这些变化。
-HTMLCollection: 是动态的，会随着 DOM 结构的变化而自动更新。如果你获取了一个 HTMLCollection，然后在之后修改了匹配的节点，HTMLCollection 会自动更新以反映这些变化。
+NodeList: 通常是静态的, 不会随 DOM 的修改而自动更新. 这意味着, 如果在获取 NodeList 后, DOM 结构发生了变化(如添加或删除了匹配的节点), NodeList 不会自动反映这些变化. 
+HTMLCollection: 是动态的, 会随着 DOM 结构的变化而自动更新. 如果你获取了一个 HTMLCollection, 然后在之后修改了匹配的节点, HTMLCollection 会自动更新以反映这些变化. 
 
 const arr1 = Array.from(list)
 const arr2 = Array.prototype.slice.call(list)
@@ -559,3 +559,9 @@ event loop它的执行顺序:
 宏任务包括: script , setTimeout, setInterval , setImmediate , I/O , UI rendering. 
 
 注意⚠️: 在所有任务开始的时候,由于宏任务中包括了script,所以浏览器会先执行一个宏任务,在这个过程中你看到的延迟任务(例如setTimeout)将被放到下一轮宏任务中来执行. 
+
+----
+
+时间戳
+Date.now() // 1719825906978
+new Date().valueOf()  //  1719825906978

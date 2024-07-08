@@ -47,6 +47,12 @@ React 中最常见的问题之一是组件不必要地重新渲染. React 提供
 6 合成事件 SyntheticEvent
 在 React 中,  合成事件是 React 提供的一种事件处理机制,  它是对原生 DOM 事件的封装和优化. React 使用合成事件来处理用户交互,  以提高性能和跨浏览器一致性. 
 
+目的
+1. 进行浏览器兼容, 实现更好的跨平台
+2. 避免垃圾回收
+3. 方便事件统一管理和事务机制
+
+
 合成事件的特点包括: 
 1. 跨浏览器兼容性: React 封装了原生 DOM 事件,  使得开发者无需关心不同浏览器的兼容性问题. 
 2. 事件委托: React 使用事件委托的方式来处理事件,  将事件绑定在最外层容器上,  通过事件冒泡机制来处理具体的事件,  减少了事件绑定的数量,  提高了性能. 
@@ -56,7 +62,8 @@ React 中最常见的问题之一是组件不必要地重新渲染. React 提供
 使用合成事件可以使得事件处理更加简洁和高效,  同时提供了一些额外的特性和优化,  方便开发者进行事件处理和交互操作. 
 
 react17之前是绑定在document上的,17之后是绑定在#root
- React 事件机制的一些重要特点和使用方式: 
+1 事件统一绑定container上, ReactDOM.render(app,  container);而不是document上, 这样好处是有利于微前端的, 微前端一个前端系统中可能有多个应用, 如果继续采取全部绑定在document上, 那么可能多应用下会出现问题. 
+
 
 合成事件: React 使用合成事件来代替原生 DOM 事件,提供了跨浏览器一致性. 合成事件是 SyntheticEvent 的实例,它是对底层的原生事件的封装,并提供了与原生事件相同的属性和方法. 
 
@@ -102,6 +109,8 @@ const EnhancedComponent = withLogger(MyComponent);
 
 // 使用增强版组件
 <EnhancedComponent />;
+
+和27中的 装饰器 效果类似, 包装组件以提供附加功能的高阶函数
 
 9. 什么是 context 和 useContext Hook?
 
@@ -399,6 +408,11 @@ type Name = {
 }
 type User = Name & { age: number  };
 
+都可以配置可选 和 或类型
+{
+  name?: string | null
+}
+
 ###########  type 可以而 interface 不行
 type 可以声明基本类型别名, 联合类型, 元组等类型
 // 基本类型别名
@@ -503,7 +517,7 @@ useEffect(() => {
   };
 }, []);
 
-24. 什么是 React Hook?有哪些重要的钩子?
+24. 什么是 React Hook? 有哪些重要的钩子?
 React Hooks 是使函数组件能够使用 React 中的状态和生命周期功能的函数. 它们在 React 16.8 中引入, 是为了解决函数组件中的状态管理和副作用问题, 允许开发人员在不编写类的情况下使用状态和其他 React 功能. 
 
 - useState  向组件添加状态变量 const [state, setState] = useState(initialState)
@@ -525,7 +539,9 @@ React Hooks 是使函数组件能够使用 React 中的状态和生命周期功�
 错误边界无法捕获自身内部的错误. 
 https://zh-hans.react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary
 
-如果类组件定义了生命周期方法 static getDerivedStateFromError() 或 componentDidCatch() 中的一个(或两个),则该类组件将成为错误边界. 使用 static getDerivedStateFromError() 在引发错误后呈现后备 UI. 
+如果"类组件"定义了生命周期方法 static getDerivedStateFromError() 或 componentDidCatch() 中的一个(或两个),则该类组件将成为错误边界. 
+
+使用 static getDerivedStateFromError() 在引发错误后呈现后备 UI. 
 使用 componentDidCatch() 来记录错误信息. 
 
 //  例子
@@ -577,7 +593,9 @@ class ErrorBoundary extends React.Component {
 
 React DOM 是一个 JavaScript 库,用于将 React 组件渲染到浏览器的(DOM). 它提供了许多与 DOM 交互的方法,例如创建元素, 更新属性和删除元素. 
 
-React DOM 与 React 结合使用来构建用户界面. React 使用虚拟 DOM 来跟踪 UI 的状态,React DOM 负责更新真实 DOM 以匹配虚拟 DOM. 
+React DOM 与 React 结合使用来构建用户界面. 
+- React 使用虚拟 DOM 来跟踪 UI 的状态
+- React DOM 负责更新真实 DOM 以匹配虚拟 DOM. 
 //  example
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -693,15 +711,22 @@ const App = () => (
 
 在 ReactJS 应用程序中,您可以使用 Webpack 等工具实现代码分割, 延迟加载和动态导入,Webpack 为这些功能提供内置支持. 
 
-动态 import() 语句异步加载模块,Webpack 会自动拆分代码并为动态导入的模块生成单独的包. 
+动态 import() 语句异步加载模块,Webpack / vite 会自动拆分代码并为动态导入的模块生成单独的包. 
 
 b) 服务器端渲染(SSR
-c) 优化捆绑包大小: 密切关注捆绑包大小,并通过删除未使用的依赖项, 使用树摇动和最小化大型库的使用来优化它. 
+
+c) 优化捆绑包大小: 密切关注捆绑包大小,并通过删除未使用的依赖项, 使用tree-shaking和最小化大型库的使用来优化它. 
+
 d) React.memo() 或 PureComponent
+
 e) 使用 React.Fragments 或 <> </> 
-f) 节流和去抖动事件操作
+
+f) 节流和去抖事件操作
+
 g) useMemo() 和 useCallback(): 这两个钩子都可以通过减少组件需要重新渲染或记住组件或昂贵操作的结果的次数来帮助优化 React 组件. 
+
 h) 使用 Web Workers 执行 CPU 大量任务: Web Workers 可以在 Web 应用程序的后台线程中运行脚本操作,与主执行线程分开. 通过在单独的线程中执行繁重的处理,主线程(通常是 UI)能够运行而不会被阻塞或减慢. 
+
 i) 虚拟化长列表: 列表虚拟化或窗口化是一种在渲染长数据列表时提高性能的技术. 该技术在任何给定时间仅渲染一小部分行
 
 有几种不同的方法可以在 React 中实现受保护的路由. 一种常见的方法是使用 React Router 库. React Router 允许您定义路由并指定哪些用户有权访问每个路由. 
@@ -766,18 +791,14 @@ React 18还引入了一种新的并发模式,允许React同时处理多个任务
 - Suspense:
 React 18 还引入了一个新的Suspense功能,允许 React 延迟渲染组件,直到其数据可用. 这可以防止 React 在等待数据时呈现空白屏幕,从而改善用户体验. 
 
-- New Hooks: React 18 引入了新的 Hook,例如 useId[useId 是一个 React Hook,可以生成传递给无障碍属性的唯一 ID. 
-
-], useTransition[useTransition 是一个帮助你在不阻塞 UI 的情况下更新状态的 React Hook.  例子 - 切换不同tab时,若某tab尚未加载完,也可以点击其他tab
-
-] 等,
+- New Hooks: React 18 引入了新的 Hook,例如 useId[useId 是一个 React Hook,可以生成传递给无障碍属性的唯一 ID. ], useTransition[useTransition 是一个帮助你在不阻塞 UI 的情况下更新状态的 React Hook.  例子 - 切换不同tab时,若某tab尚未加载完,也可以点击其他tab] 等,
 
 - New APIs: React 18 引入了一些新的 API,例如 createRoot, hydrateRoot 等
 
 38 react 设计模式
 状态管理模式 ,  不可变数据模式 ,  错误边界模式 ,  Context API ,  高阶组件 (HOC): HOC 是接受组件作为参数并返回具有增强功能的新组件的函数. 
 
-39 Next.js 是一个构建在 React 之上的框架,并提供服务器端渲染, 静态站点生成和自动路由等附加功能. 
+39 Next.js 是一个构建在 React 之上的框架, 并提供服务器端渲染, 静态站点生成和自动路由等附加功能. 
 
 40 React v19 的新特性概览
 React 编译器: React 实现了一个新的编译器. 目前,Instagram 已经在利用这项技术了. 
@@ -893,6 +914,4 @@ React DND[17]是一个帮助你构建基于拖放功能的 React 应用程序的
 
 当涉及到 React 中的表单构建时, React Hook Form[24]是王者. 它是一个高性能的, 轻量的库. 没有任何依赖, 可以通过减少代码, 隔离重新渲染, 更快的挂载等来提高应用程序性能. 
 
-
-react 滚动懒加载
 ```

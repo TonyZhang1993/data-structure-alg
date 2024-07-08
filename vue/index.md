@@ -403,7 +403,7 @@ let oldVDOM = { // 旧虚拟DOM
         ]
     }
 
-虚拟DOM比真实DOM快这句话其实是错的, 或者说是不严谨的. 那正确的说法是什么呢？
+虚拟DOM比真实DOM快这句话其实是错的, 或者说是不严谨的. 那正确的说法是什么呢? 
 
 虚拟DOM算法操作真实DOM, 性能高于直接操作真实DOM, 虚拟DOM和虚拟DOM算法是两种概念. 虚拟DOM算法 = 虚拟DOM + Diff算法
 
@@ -452,7 +452,7 @@ updateChildren方法
 参考 - https://mp.weixin.qq.com/s/kjUhjliSHFLX52zYKUkNaA
 
 
-### 平常v-for循环渲染的时候, 为什么不建议用index作为循环项的key呢？
+### 平常v-for循环渲染的时候, 为什么不建议用index作为循环项的key呢? 
 <ul>                      <ul>
     <li key="0">a</li>        <li key="0">林三心</li>
     <li key="1">b</li>        <li key="1">a</li>

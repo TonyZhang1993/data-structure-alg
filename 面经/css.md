@@ -72,7 +72,7 @@ CSS3 新增伪类
 
 
 
-如何居中 div？
+如何居中 div? 
 
 对于宽高固定的元素
 (1)我们可以利用margin:0 auto来实现元素的水平居中. 
@@ -210,7 +210,7 @@ display: flex; flex: 1;自动拉伸以填充可用空间
 (3)如果元素position:fixed, 则"包含块"是"初始包含块". 
 (4)如果元素position:absolute, 则"包含块"由最近的position不为static的祖先元素建立
 
-CSS 里的 visibility 属性有个 collapse 属性值是干嘛用的？在不同浏览器下以后什么区别？
+CSS 里的 visibility 属性有个 collapse 属性值是干嘛用的? 在不同浏览器下以后什么区别? 
 (1)对于一般的元素, 它的表现跟visibility: hidden;是一样的. 元素是不可见的, 但此时仍占用页面空间. 
 (2)但例外的是, 如果这个元素是table相关的元素, 例如table行, table group, table列, table column group, 它的
 表现却跟display:none一样, 也就是说, 它们占用的空间也会释放. 
@@ -351,7 +351,7 @@ unset是取消设置的意思, 也就是当前元素浏览器或用户设置的C
 幕尺寸做处理. 页面头部必须有meta声明的viewport. 
 
 
-怎么让 Chrome 支持小于 12px 的文字？
+怎么让 Chrome 支持小于 12px 的文字? 
 在谷歌下css设置字体大小为12px及以下时, 显示都是一样大小, 都是默认12px. 
 - 可以使用css3的transform缩放属性-webkit-transform:scale(0.5);注意-webkit-transform:scale(0.
 75);收缩的是整个元素的大小, 这时候, 如果是内联元素, 必须要将内联元素转换成块元素, 可以使用display: block/
@@ -375,10 +375,10 @@ ppi指的是每英寸的物理像素的密度, ppi越大, 屏幕的分辨率越�
 
 多数显示器默认频率是60Hz, 即1秒刷新60次, 所以理论上最小间隔为1/60*1000ms＝16.7ms
 
-如何让去除 inline-block 元素间间距？
+如何让去除 inline-block 元素间间距? 
 移除空格, 使用margin负值, 使用font-size:0, letter-spacing, word-spacing
 
-overflow:scroll 时不能平滑滚动的问题怎么处理？
+overflow:scroll 时不能平滑滚动的问题怎么处理? 
 以下代码可解决这种卡顿的问题: -webkit-overflow-scrolling:touch;是因为这行代码启用了硬件加速特性, 所以滑动很流
 畅. 
 
@@ -445,7 +445,7 @@ PNG 格式的文件大小 》 JPEG格式的文件大小. 这是因为JPEG采用�
 图片合并麻烦
 维护麻烦, 修改一个图片可能需要重新布局整个图片, 样式
 
------使用 rem 布局的优缺点？
+-----使用 rem 布局的优缺点? 
 优点: 
 在屏幕分辨率千差万别的时代, 只要将rem与屏幕分辨率关联起来就可以实现页面的整体缩放, 使得在设备上的展现都统一起来了. 
 而且现在浏览器基本都已经支持rem了, 兼容性也非常的好. 
