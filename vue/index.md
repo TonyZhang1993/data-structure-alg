@@ -26,6 +26,7 @@ import {
   onBeforeUnmount,
   onUnmounted,
 } from 'vue'
+</script>
 
 Vue3 里,除了将两个 destroy 相关的钩子,改成了 unmount,剩下的需要注意的,就是在 <script setup> 中,不能使用 beforeCreate 和 created 两个钩子. 
 
@@ -44,17 +45,17 @@ Vue3.x 将使用 Proxy 取代 Vue2.x 版本的 Object.defineProperty
 
 3.vue3和vue2的区别
 
-源码组织方式变化: 使用 TS 重写
-支持 Composition API: 基于函数的API,更加灵活组织组件逻辑(vue2用的是options api)
-响应式系统提升: Vue3中响应式数据原理改成proxy,可监听动态新增删除属性,以及数组变化
-编译优化: vue2通过标记静态根节点优化diff,Vue3 标记和提升所有静态根节点,diff的时候只需要对比动态节点内容
-打包体积优化: 移除了一些不常用的api(inline-template, filter)
-生命周期的变化: 使用setup代替了之前的beforeCreate和created
-Vue3 的 template 模板支持多个根标签
-Vuex状态管理: 创建实例的方式改变,Vue2为new Store , Vue3为createStore
-Route 获取页面实例与路由信息: vue2通过this获取router实例,vue3通过使用 getCurrentInstance/ useRoute和useRouter方法获取当前组件实例
-Props 的使用变化: vue2 通过 this 获取 props 里面的内容,vue3 直接通过 props
-父子组件传值: vue3 在向父组件传回数据时,如使用的自定义名称,如 backData,则需要在 emits 中定义一下
+- 源码组织方式变化: 使用 TS 重写
+- 支持 Composition API: 基于函数的API,更加灵活组织组件逻辑(vue2用的是options api)
+- 响应式系统提升: Vue3中响应式数据原理改成proxy,可监听动态新增删除属性,以及数组变化
+- 编译优化: vue2通过标记静态根节点优化diff,Vue3 标记和提升所有静态根节点,diff的时候只需要对比动态节点内容
+- 打包体积优化: 移除了一些不常用的api(inline-template, filter)
+- 生命周期的变化: 使用setup代替了之前的beforeCreate和created
+- Vue3 的 template 模板支持多个根标签
+- Vuex状态管理: 创建实例的方式改变,Vue2为new Store , Vue3为createStore
+- Route 获取页面实例与路由信息: vue2通过this获取router实例,vue3通过使用 getCurrentInstance/ useRoute和useRouter方法获取当前组件实例
+- Props 的使用变化: vue2 通过 this 获取 props 里面的内容,vue3 直接通过 props
+- 父子组件传值: vue3 在向父组件传回数据时,如使用的自定义名称,如 backData,则需要在 emits 中定义一下
 
 MVVM是Model-View-ViewModel缩写,也就是把MVC中的Controller演变成ViewModel. Model层代表数据模型,View代表UI组件,ViewModel是View和Model层的桥梁,数据会绑定到viewModel层并自动将数据渲染到页面中,视图变化的时候会通知viewModel层更新数据. 
 
@@ -80,7 +81,7 @@ keep-alive 内部的组件切回时,不用重新创建组件实例,而直接使�
 * 受 keep-alive 的影响,其内部所有嵌套的组件都具有两个生命周期钩子函数,分别是 activated 和 deactivated,它们分别在组件激活和失活时触发. 第一次 activated 触发是在 mounted 之后
 
 还提供了 max 属性,通过它可以设置最大缓存数,当缓存的实例超过该数时,vue 会移除最久没有使用的组件缓存. 
-keep-alive的中还运用了LRU(Least Recently Used)算法. 
+keep-alive 中还运用了LRU(Least Recently Used)算法. 
 
 keep-alive 在内部维护了一个 key 数组和一个缓存对象
 
@@ -169,10 +170,14 @@ nextTick 的作用是确保在 DOM 更新之后执行回调函数,其实现原�
 ## vue compiler
 在使用 vue 的时候,我们有两种方式来创建我们的 HTML 页面,第一种情况,也是大多情况下,我们会使用模板 template 的方式,因为这更易读易懂也是官方推荐的方法; 第二种情况是使用 render 函数来生成 HTML,它比 template 更接近最终结果. 
 
-complier 的主要作用是*解析模板,生成渲染模板的 render*, 而 render 的作用主要是为了生成 *VNode*
+complier 的主要作用是 *解析模板,生成渲染模板的 render*,
+而 render 的作用主要是为了生成 *VNode*
+
+预编译的模板，例如单文件组件中的模板，会在构建时被编译为 render 选项。如果一个组件中同时存在 render 和 template，则 render 将具有更高的优先级。
+
 complier 主要分为 3 大块: 
 parse: 接受 template 原始模板,按着模板的节点和数据生成对应的 AST语法树
-optimize: 遍历 AST 的每一个节点,标记静态节点,这样就知道哪部分不会变化,于是在页面需要更新时,通过 diff 减少去对比这部分DOM,提升性能
+optimize: 遍历 AST 的每一个节点,标记"静态节点",这样就知道哪部分不会变化,于是在页面需要更新时,减少去对比这部分DOM 的 Diff,提升性能
 generate 把前两步生成完善的 AST render 字符串,然后将 render 字符串通过 new Function 的方式转换成渲染函数
 
 ## vue 模版编译的原理是什么
@@ -288,7 +293,7 @@ PWA
 
 ## Tree-shaking 是一种用于剔除 JavaScript 应用中未使用代码的优化技术,通过静态分析代码的依赖关系,去除生产环境中不会被使用的代码,从而减小最终打包文件的体积. Tree-shaking 主要应用于模块化开发环境,通常与 ES6 模块系统(如 import 和 export)结合使用. 
 
-Tree-shaking 的原理是通过静态代码分析,识别和标记那些在运行时不会被引用的代码,然后在打包阶段将这些未引用的代码从最终的输出中去除. 这个过程需要构建工具(如 Webpack 或 Rollup)的支持,以便能够正确识别哪些代码是未使用的. 
+Tree-shaking 的原理是通过静态代码分析,识别和标记那些在运行时不会被引用的代码,然后在打包阶段将这些未引用的代码从最终的输出中去除. 这个过程需要构建工具(如 Webpack 或 Rollup / vite)的支持,以便能够正确识别哪些代码是未使用的. 
 
 以下是一个简单的例子,展示了如何使用 Tree-shaking 去除未使用的代码: 
 
@@ -468,3 +473,17 @@ updateChildren方法
 ```
 
 ![alt text](image.png)
+
+1. View 传送指令到 Controller
+2. Controller 完成业务逻辑后，要求 Model 改变状态
+3. Model 将新的数据发送到 View，用户得到反馈
+
+* 视图（View）：用户界面。
+* 控制器（Controller）：业务逻辑
+* 模型（Model）：数据保存
+![alt text](E9137487-3595-4D1F-A88D-6702251CF606.png)
+
+唯一的区别是，它采用双向绑定（data-binding）：View的变动，自动反映在 ViewModel，反之亦然
+
+MVVM是Model-View-ViewModel缩写,也就是把MVC中的Controller演变成ViewModel. Model层代表数据模型,View代表UI组件,ViewModel是View和Model层的桥梁,数据会绑定到viewModel层并自动将数据渲染到页面中,视图变化的时候会通知viewModel层更新数据. 
+![alt text](92F189F3-3289-4524-B566-96F5256D291C.png)
