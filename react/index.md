@@ -115,6 +115,10 @@ componentDidCatch(error, info): 当后代组件抛出错误时,在"提交"阶段
 
 8 React 高阶组件
 React 高阶组件(Higher Order Component,  HOC)是一种用于重用组件逻辑的高级技朮. HOC 是一个函数,  接受一个组件作为参数,  然后返回一个新的增强版组件. 通过 HOC,  可以在不改变组件原有结构的情况下,  添加额外的功能, 逻辑或属性. 
+
+高阶组件的这种实现方式，本质上是一个装饰者设计模式
+
+
 // 定义一个 HOC
 const withLogger = (WrappedComponent) => {
   return class extends React.Component {
@@ -170,11 +174,22 @@ const App = () => {
 
 随着 React hooks 的引入,  有状态组件也可以使用函数式组件来编写. 
 
+Hooks让我们的函数组件拥有了类组件的特性，例如组件内的状态、生命周期
+
+
 函数组件+hooks 更优雅的逻辑复用方式
 hooks(主要是useEffect)取代了生命周期的概念(减少API),  让开发者的代码更加"声明化"
 Class 组件不易拆解,  相同的业务逻辑逻辑在各处; 
 
 useEffect -> 可以看作是 componentDidMount componentDidUpdate componentWillUnmount 三个生命周期函数的组合
+
+hooks能够更容易解决状态相关的重用的问题：
+
+每调用useHook一次都会生成一份独立的状态
+
+通过自定义hook能够更好的封装我们的功能
+
+编写hooks为函数式编程，每个功能都包裹在函数中，整体风格更清爽，更优雅
 
 11.为什么我们不应该直接更新状态?
 当你直接更新状态时,  React 不会检测到发生了变化,  因为它不会触发重新渲染过程. 这可能会导致您的 UI 无法反映更新后的状态,  从而导致难以调试的不一致和错误. [性能下降等]
@@ -991,4 +1006,110 @@ constructor中bind
 1 key 应该是唯一的
 2 key不要使用随机值（随机数在下一次 render 时，会重新生成一个数字）
 3 使用 index 作为 key值，对性能没有优化
+
+
+- react 引入css 方式
+1 在组件内直接使用
+const div1 = {
+  width: "300px",
+  margin: "30px auto",
+  backgroundColor: "#44014C",  //驼峰法
+  minHeight: "200px",
+  boxSizing: "border-box"
+};
+<div style={div1}>123</div>
+
+这种方式优点：
+内联样式, 样式之间不会有冲突
+可以动态获取当前state中的状态
+
+缺点：
+写法上都需要使用驼峰标识
+某些样式没有提示
+大量的样式,代码混乱
+某些样式无法编写(比如伪类/伪元素)
+
+
+2 组件中引入 .css 文件
+这种方式存在不好的地方在于样式是全局生效，样式之间会互相影响
+
+3 组件中引入 .module.css 文件
+能够解决局部作用域问题，但也有一定的缺陷：
+引用的类名，不能使用连接符(.xxx-xx)，在 JavaScript 中是不识别的[借助 clsx 库] 
+className={clsx(styles.foot: active === 2, styles[`foot-${lang}`])}
+所有的 className 都必须使用 {style.className} 的形式来编写
+不方便动态来修改某些样式，依然需要使用内联样式的方式；【动态添加class】
+
+
+4 CSS in JS
+styled-components 第三方库
+export const SelfLink = styled.div`
+  height: 50px;
+  border: 1px solid red;
+  color: yellow;
+`;
+
+<SelfLink title="People's Republic of China">app.js</SelfLink>
+
+
+- react 组件间动画
+在react中，react-transition-group是一种很好的解决方案，其为元素添加enter，enter-active，exit，exit-active这一系列勾子
+其主要提供了三个主要的组件：
+
+CSSTransition：在前端开发中，结合 CSS 来完成过渡动画效果
+SwitchTransition：两个组件显示和隐藏切换时，使用该组件
+TransitionGroup：将多个动画组件包裹在其中，一般用于列表中元素的动画
+
+- react-router
+react-router主要分成了几个不同的包：
+
+react-router: 实现了路由的核心功能
+react-router-dom： 基于 react-router，加入了在浏览器运行环境下的一些功能
+react-router-native：基于 react-router，加入了 react-native 运行环境下的一些功能
+react-router-config: 用于配置静态路由的工具库
+
+react-router-dom的常用API，主要是提供了一些组件：
+BrowserRouter、HashRouter
+Route
+Link、NavLink
+switch
+redirect
+
+Route用于路径的匹配，然后进行组件的渲染，对应的属性如下：
+path 属性：用于设置匹配到的路径
+component 属性：设置匹配到路径后，渲染的组件
+render 属性：设置匹配到路径后，渲染的内容
+exact 属性：开启精准匹配，只有精准匹配到完全一致的路径，才会渲染对应的组件
+
+Link、NavLink
+通常路径的跳转是使用Link组件，最终会被渲染成a元素，其中属性to代替a标题的href属性
+
+NavLink是在Link基础之上增加了一些样式属性，例如组件被选中时，发生样式变化，则可以设置NavLink的一下属性：
+
+activeStyle：活跃时（匹配时）的样式
+activeClassName：活跃时添加的class
+
+用于路由的重定向，当这个组件出现时，就会执行跳转到对应的to路径中
+<Redirect to="/" />
+
+swich组件的作用适用于当匹配到第一个组件的时候，后面的组件就不应该继续匹配
+
+useHistory可以让组件内部直接访问history，无须通过props获取
+
+const { category, id } = useParams() // 动态路由中的参数 /:id
+
+{ pathname, search } = useLocation() // path & search 参数
+
+navigate = useNavigate()  //  navigate(`${e.key}`)
+
+<NavLink to={{
+    pathname: "/detail2", 
+    query: {name: "kobe", age: 30},
+    state: {height: 1.98, address: "洛杉矶"},
+    search: "?apikey=123"
+  }}>
+  详情2
+</NavLink>
+
+获取参数的形式 const location = useLocation()
 ```
