@@ -47,6 +47,20 @@ React 中最常见的问题之一是组件不必要地重新渲染. React 提供
 6 合成事件 SyntheticEvent
 在 React 中,  合成事件是 React 提供的一种事件处理机制,  它是对原生 DOM 事件的封装和优化. React 使用合成事件来处理用户交互,  以提高性能和跨浏览器一致性. 
 
+事件名称命名方式不同
+// 原生事件绑定方式
+<button onclick="handleClick()">按钮命名</button>
+      
+// React 合成事件绑定方式
+const button = <button onClick={handleClick}>按钮命名</button>
+
+事件处理函数书写不同
+// 原生事件 事件处理函数写法
+<button onclick="handleClick()">按钮命名</button>
+      
+// React 合成事件 事件处理函数写法
+const button = <button onClick={handleClick}>按钮命名</button>
+
 目的
 1. 进行浏览器兼容, 实现更好的跨平台
 2. 避免垃圾回收
@@ -66,6 +80,16 @@ react17之前是绑定在document上的,17之后是绑定在#root
 
 
 合成事件: React 使用合成事件来代替原生 DOM 事件,提供了跨浏览器一致性. 合成事件是 SyntheticEvent 的实例,它是对底层的原生事件的封装,并提供了与原生事件相同的属性和方法. 
+
+总结：
+React 所有事件都挂载在 root 对象上
+当真实 DOM 元素触发事件，会冒泡到 root 对象后，再处理 React 事件
+所以会先执行原生事件，然后处理 React 事件
+最后真正执行 root 上挂载的事件
+
+想要阻止不同时间段的冒泡行为，对应使用不同的方法，对应如下：
+阻止合成事件间的冒泡，用e.stopPropagation()
+阻止合成事件与最外层 document 上的事件间的冒泡，用e.nativeEvent.stopImmediatePropagation()
 
 7 组件生命周期
 1. 挂载阶段 :  由ReactDOM.render()触发---初次渲染
@@ -914,4 +938,57 @@ React DND[17]是一个帮助你构建基于拖放功能的 React 应用程序的
 
 当涉及到 React 中的表单构建时, React Hook Form[24]是王者. 它是一个高性能的, 轻量的库. 没有任何依赖, 可以通过减少代码, 隔离重新渲染, 更快的挂载等来提高应用程序性能. 
 
+others:
+在组件生命周期或React合成事件中，setState是异步
+在setTimeout或者原生dom事件中，setState是同步
+
+setNumber(n + 1);
+setNumber(n + 1);
+//  结果还是 n+1
+
+setNumber(n => n + 1);
+setNumber(n => n + 1);
+//  结果 n+2
+
+React基于浏览器的事件机制自身实现了一套事件机制，包括事件注册、事件的合成、事件冒泡、事件派发等
+
+在React中这套事件机制被称之为合成事件
+
+如果想要获得原生DOM事件，可以通过e.nativeEvent属性获取
+
+
+类组件 - 事件绑定
+render方法中使用bind
+      <div onClick={this.handleClick.bind(this)}>test</div>
+
+render方法中使用箭头函数
+      <div onClick={e => this.handleClick(e)}>test</div>
+
+constructor中bind
+    this.handleClick = this.handleClick.bind(this);
+
+定义阶段使用箭头函数绑定
+  handleClick = () => {
+    console.log('this > ', this);
+  }
+
+  由于react hooks的出现，函数式组件创建的组件通过使用hooks方法也能使之成为有状态组件，再加上目前推崇函数式编程，所以这里建议都使用函数式的方式来创建组件
+
+- 通信
+由于React的数据流动为单向的，父组件向子组件传递是最常见的方式
+
+子组件向父组件通信的基本思路是，父组件向子组件传一个函数，然后通过这个函数的回调，拿到子组件传过来的值
+
+如果是兄弟组件之间的传递，则父组件作为中间层来实现数据的互通，通过使用父组件传递
+
+父组件向后代组件传递数据是一件最普通的事情，就像全局数据一样，使用context提供了组件之间通讯的一种方式，可以共享数据，其他数据都能读取对应的数据
+
+- key 的作用
+跟Vue一样，React 也存在 Diff算法，而元素key属性的作用是用于判断元素是新创建的还是被移动的元素，从而减少不必要的元素渲染
+
+因此key的值需要为每一个元素赋予一个确定的标识
+
+1 key 应该是唯一的
+2 key不要使用随机值（随机数在下一次 render 时，会重新生成一个数字）
+3 使用 index 作为 key值，对性能没有优化
 ```
