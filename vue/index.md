@@ -15,6 +15,12 @@ Vue2 & Vue3 生命周期
   // Vue2 里叫 destroyed
   unmounted() {}, //  销毁实例,清楚事件监听/定时器回收等
 
+  created是在组件实例一旦创建完成的时候立刻调用，这时候页面dom节点并未生成；
+  
+  mounted是在页面dom节点渲染完毕之后就立刻执行的。触发时机上created是比mounted要更早的
+  
+  两者的相同点：都能拿到实例对象的属性和方法。 讨论这个问题本质就是触发的时机，放在mounted中的请求有可能导致页面闪动（因为此时页面dom结构已经生成）建议对页面内容的改动放在created生命周期当中。
+
 <script setup>
 import {
   onBeforeMount,
@@ -487,3 +493,96 @@ updateChildren方法
 
 MVVM是Model-View-ViewModel缩写,也就是把MVC中的Controller演变成ViewModel. Model层代表数据模型,View代表UI组件,ViewModel是View和Model层的桥梁,数据会绑定到viewModel层并自动将数据渲染到页面中,视图变化的时候会通知viewModel层更新数据. 
 ![alt text](92F189F3-3289-4524-B566-96F5256D291C.png)
+
+
+```js
+1
+#单页应用优缺点
+优点：
+具有桌面应用的即时性、网站的可移植性和可访问性
+用户体验好、快，内容的改变不需要重新加载整个页面
+良好的前后端分离，分工更明确
+
+缺点：
+不利于搜索引擎的抓取
+首次渲染速度相对较慢
+
+2 v-for & v-if
+控制手段：v-show隐藏则是为该元素添加css--display:none，dom元素依旧还在。v-if显示隐藏是将dom元素整个添加或删除
+
+编译条件：v-if是真正的条件渲染，它会确保在切换过程中条件块内的事件监听器和子组件适当地被销毁和重建。只有渲染条件为假时，并不做操作，直到为真才渲染
+
+v-show 由false变为true的时候不会触发组件的生命周期
+
+v-if由false变为true的时候，触发组件的beforeCreate、create、beforeMount、mounted钩子，由true变为false的时候触发组件的beforeDestory、destoryed方法
+
+性能消耗：v-if有更高的切换消耗；v-show有更高的初始渲染消耗；
+
+3 v-for优先级比v-if高
+
+- 永远不要把 v-if 和 v-for 同时用在同一个元素上，带来性能方面的浪费（每次渲染都会先循环再进行条件判断）
+- 如果避免出现这种情况，则在外层嵌套template（页面渲染不生成dom节点），在这一层进行v-if判断，然后在内部进行v-for循环
+- 如果条件出现在循环内部，可通过计算属性computed提前过滤掉那些不需要显示的项
+
+4 SPA首屏加载速度慢的怎么解决？
+首屏时间（First Contentful Paint），指的是浏览器从响应用户输入网址地址，到首屏内容渲染完成的时间，此时整个网页不一定要全部渲染完成，但需要展示当前视窗需要的内容
+
+通过DOMContentLoad或者performance来计算出首屏时间
+
+tip:
+document.addEventListener("DOMContentLoaded", (event) => {
+    console.log("DOM 完全加载和解析");
+  });
+
+window.addEventListener("load", (event) => {
+  console.log("page is fully loaded");
+});
+
+白屏的时间
+通常认为浏览器开始渲染 <body> 标签或者解析完 <head> 标签的时刻就是页面白屏结束的时间点。
+
+浏览器支持 performance.timing
+
+<head>
+<title>Document</title>
+</head>
+<script type="text/javascript">
+// 白屏时间结束点
+var firstPaint = Date.now()
+var start = performance.timing.navigationStart
+console.log(firstPaint - start)
+</script>
+
+首屏加载的时间【首屏内容渲染完成的时间】
+用户自定义打点—最准确的方式（只有用户自己最清楚，什么样的时间才算是首屏加载完成）
+缺点：侵入业务，成本高
+
+粗略的计算首屏时间: loadEventEnd - fetchStart/startTime 或者 domInteractive - fetchStart/startTime
+通过计算首屏区域内的所有图片加载时间，然后取其最大值
+利用 MutationObserver 接口，监听 document 对象的节点变化
+
+
+
+// performance.getEntriesByName("first-contentful-paint")[0]
+// 会返回一个 PerformancePaintTiming的实例，结构如下：
+{
+  name: "first-contentful-paint",
+  entryType: "paint",
+  startTime: 507.80000002123415,
+  duration: 0,
+};
+
+常见的几种SPA首屏优化方式
+
+减小入口文件积【路由懒加载】
+静态资源本地缓存【采用HTTP缓存】
+UI框架按需加载【按需引用】
+图片资源的压缩
+组件重复打包
+开启GZip压缩
+使用SSR
+
+
+```
+
+![alt text](image-1.png)

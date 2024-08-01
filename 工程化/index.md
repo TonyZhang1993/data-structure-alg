@@ -2,18 +2,31 @@
 1 Webpack的配置主要包括以下几个部分: 
 
 entry. 指定Webpack打包的入口文件,可以是单个或多个JavaScript文件. 这个配置决定了Webpack从哪个模块开始生成依赖关系图. 1234
+
 output. 设置Webpack打包后输出的目录和文件名称,包括path, filename和publicPath等. 235
+
 module. 配置了不同的loaders来处理不同的模块,例如,对于CSS文件,可以使用css-loader和style-loader. 2345
+
 resolve. 设置Webpack如何解析模块依赖,包括别名, 扩展名等. 
+
 plugins. 使用不同的插件可以增强Webpack的功能,例如,使用html-webpack-plugin可以将打包后的js文件自动引用到HTML文件中. 
+
 devServer. 提供了一个简单的web服务器和实时重载功能,可以通过devServer.contentBase, devServer.port, devServer.proxy等进行配置. 
+
 optimization. 可以使用optimization.splitChunks和optimization.runtimeChunk配置代码拆分和运行时代码提取等优化策略. 
+
 externals. 用于配置排除打包的模块,例如,可以将jQuery作为外置扩展,避免将其打包到应用程序中. 
+
 devtool. 配置source-map类型. 
+
 context. webpack使用的根目录,string类型必须是绝对路径. 
+
 target. 指定Webpack编译的目标环境. 
+
 performance. 输出文件的性能检查配置. 
+
 noParse. 不用解析和处理的模块. 
+
 stats. 控制台输出日志控制. 
 
 2 Loader:
@@ -86,7 +99,8 @@ module.exports = {
   // ...  
   optimization: {    
     usedExports: true,    
-    concatenateModules: true,    minimize: true,  
+    concatenateModules: true,    
+    minimize: true,  
   },  
   // ...
 };

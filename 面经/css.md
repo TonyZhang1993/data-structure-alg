@@ -260,7 +260,7 @@ dding或者高度来解决这个问题.
 
 BFC 规范(块级格式化上下文: block formatting context)
 BFC是一个独立的布局环境, 可以理解为一个容器, 在这个容器中按照一定规则进行物品摆放, 并且不会影响其它环境中的物品. 
-•如果一个元素符合触发BFC的条件, 则BFC中的元素布局不受外部影响. 
+如果一个元素符合触发BFC的条件, 则BFC中的元素布局不受外部影响. 
 
 创建BFC
 (1)根元素或包含根元素的元素
@@ -285,9 +285,9 @@ IFC指的是行级格式化上下文, 它有这样的一些布局规则:
 一般使用伪元素的方式清除浮动
 在父元素上应用 - 
 .clear::after{
-content:'';
-display:table;//也可以是'block', 或者是'list-item'
-clear:both;
+  content:'';
+  display:table;//也可以是'block', 或者是'list-item'
+  clear:both;
 }
 
 

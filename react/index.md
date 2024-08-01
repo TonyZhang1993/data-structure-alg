@@ -628,6 +628,18 @@ class ErrorBoundary extends React.Component {
 
 目前还没有办法将错误边界编写为函数式组件. 但是你不必自己编写错误边界类. 例如,你可以使用 react-error-boundary 包来代替. 
 
+对于错误边界无法捕获的异常，如事件处理过程中发生问题并不会捕获到，是因为其不会在渲染期间触发，并不会导致渲染时候问题
+
+这种情况可以使用js的try...catch...语法
+handleClick() {
+    try {
+      // 执行操作，如有错误则会抛出
+    } catch (error) {
+      this.setState({ error });
+    }
+  }
+
+
 26.react-dom包有什么用?
 
 React DOM 是一个 JavaScript 库,用于将 React 组件渲染到浏览器的(DOM). 它提供了许多与 DOM 交互的方法,例如创建元素, 更新属性和删除元素. 
@@ -778,6 +790,31 @@ const ProtectedRoute = ({ component: Component, isAuthenticated, ...rest }) => (
     }
   />
 );
+
+常见性能优化常见的手段有如下：
+- 避免使用内联函数
+<input type="button" onClick={(e) => { this.setState({inputValue: e.target.value}) }} value="Click For Inline Function" />
+
+<input type="button" onClick={this.setNewStateData} value="Click For Inline Function" />
+
+- 使用 React Fragments 避免额外标记
+- 使用 Immutable 【在做react性能优化的时候，为了避免重复渲染，我们会在shouldComponentUpdate()中做对比，当返回true执行render方法
+Immutable通过is方法则可以完成对比，而无需像一样通过深度比较的方式比较
+】
+- 懒加载组件
+- 事件绑定方式
+- 服务端渲染
+
+## 如何减少render？
+父组件渲染导致子组件渲染，子组件并没有发生任何改变，这时候就可以从避免无谓的渲染，具体实现的方式有如下：
+shouldComponentUpdate
+PureComponent
+React.memo
+
+## JSX转化DOM过程？
+jsx首先会转化成React.createElement这种形式，React.createElement作用是生成一个虚拟Dom对象，然后会通过ReactDOM.render进行渲染成真实DOM
+
+
 
 34. React 编码最佳实践
 组件组合: 将您的 UI 分解为更小的, 可重用的组件
@@ -979,6 +1016,8 @@ render方法中使用bind
 render方法中使用箭头函数
       <div onClick={e => this.handleClick(e)}>test</div>
 
+  ----以上方法在每次组件render的时候都会生成新的方法实例，性能欠缺
+
 constructor中bind
     this.handleClick = this.handleClick.bind(this);
 
@@ -986,6 +1025,8 @@ constructor中bind
   handleClick = () => {
     console.log('this > ', this);
   }
+
+  ------ 只会生成一个方法实例，性能方面会有所改善
 
   由于react hooks的出现，函数式组件创建的组件通过使用hooks方法也能使之成为有状态组件，再加上目前推崇函数式编程，所以这里建议都使用函数式的方式来创建组件
 
@@ -1092,7 +1133,7 @@ activeClassName：活跃时添加的class
 用于路由的重定向，当这个组件出现时，就会执行跳转到对应的to路径中
 <Redirect to="/" />
 
-swich组件的作用适用于当匹配到第一个组件的时候，后面的组件就不应该继续匹配
+switch组件的作用适用于当匹配到第一个组件的时候，后面的组件就不应该继续匹配
 
 useHistory可以让组件内部直接访问history，无须通过props获取
 
