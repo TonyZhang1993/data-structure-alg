@@ -1143,12 +1143,12 @@ const { category, id } = useParams() // 动态路由中的参数 /:id
 
 navigate = useNavigate()  //  navigate(`${e.key}`)
 
-{/* <NavLink to={{
+{/* <NavLink to={
     pathname: "/detail2", 
     query: {name: "kobe", age: 30},
     state: {height: 1.98, address: "洛杉矶"},
     search: "?apikey=123"
-  }}>
+  }>
   详情2
 </NavLink> */}
 
