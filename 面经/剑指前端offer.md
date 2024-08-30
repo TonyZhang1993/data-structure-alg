@@ -110,7 +110,7 @@ Tip：LocalStorage 和 SessionStorage 同样受到同源策略的限制。
 
 注意：渲染树只包含可见的节点
 
-引起重排/重绘的常见操作
+!!引起重排/重绘的常见操作!!
 外观有变化时，会导致*重绘*。相关的样式属性如 color opacity 等。
 布局结构或节点内容变化时，会导致*重排*。相关的样式属性如 height float position 等。
 盒子尺寸和类型。
@@ -128,7 +128,7 @@ Tip：LocalStorage 和 SessionStorage 同样受到同源策略的限制。
 * 浏览器的窗口尺寸变化（因为回流是根据视口的大小来计算元素的位置和大小的）
 注意：回流一定会触发重绘，而重绘不一定会回流
 
-如何减少！！！
+!!如何减少！！！
 解决方案
 * 对 DOM 进行批量写入和读取（通过虚拟 DOM 或者 DocumentFragment 实现）。【创建一个documentFragment，在它上面应用所有DOM操作，最后再把它添加到文档中。】
 * 避免对样式频繁操作，了解常用样式属性触发 Layout / Paint / Composite 的机制，合理使用样式。【最好一次性重写style属性，或者将样式列表定义为class并一次性更改class属性。】
@@ -140,3 +140,239 @@ Tip：LocalStorage 和 SessionStorage 同样受到同源策略的限制。
 
 webpack 是一种模块打包工具，可以将各类型的资源，例如图片、CSS、JS 等，转译组合为 JS 格式的 bundle 文件。
 
+webpack 构建的核心任务是完成内容转化和资源合并。主要包含以下 3 个阶段：
+
+- 初始化阶段
+初始化参数：从配置文件、配置对象和 Shell 参数中读取并与默认参数进行合并，组合成最终使用的参数。
+创建编译对象：用上一步得到的参数创建 Compiler 对象。
+初始化编译环境：包括注入内置插件、注册各种模块工厂、初始化 RuleSet 集合、加载配置的插件等。
+
+- 构建阶段
+开始编译：执行 Compiler 对象的 run 方法，创建 Compilation 对象。
+确认编译入口：进入 entryOption 阶段，读取配置的 Entries，递归遍历所有的入口文件，调用 Compilation.addEntry 将入口文件转换为 Dependency 对象。
+编译模块（make）： 调用 normalModule 中的 build 开启构建，从 entry 文件开始，调用 loader 对模块进行转译处理，然后调用 JS 解释器（acorn）将内容转化为 AST 对象，然后递归分析依赖，依次处理全部文件。
+完成模块编译：在上一步处理好所有模块后，得到模块编译产物和依赖关系图。
+
+- 生成阶段
+输出资源（seal）：根据入口和模块之间的依赖关系，组装成多个包含多个模块的 Chunk，再把每个 Chunk 转换成一个 Asset 加入到输出列表，这步是可以修改输出内容的最后机会。
+写入文件系统（emitAssets）：确定好输出内容后，根据配置的 output 将内容写入文件系统。
+
+AI 版本
+1. 初始化 (Initialization)
+在这个阶段，Webpack 初始化其配置并设置一些内部数据结构。主要包括：
+
+读取配置文件（通常是 webpack.config.js）。
+解析配置中的入口点（entry）、输出配置（output）、加载器（loaders）、插件（plugins）等。
+
+2. 编译 (Compilation)
+编译阶段是 Webpack 的核心部分，主要包括以下步骤：
+
+入口点 (Entry):
+Webpack 从配置文件中指定的入口点开始（通常是一个或多个 JavaScript 文件）。
+入口点是 Webpack 构建依赖图的起点。
+
+构建依赖图 (Build Dependency Graph):
+Webpack 解析入口点，并递归地分析这些文件所依赖的其他模块。
+Webpack 使用loader（module.rules 配置的加载器）来处理不同类型的文件（例如 JavaScript、CSS、图片等）。
+
+模块处理 (Module Processing):
+使用加载器（Loaders）将不同类型的文件转换为 Webpack 能理解的格式（例如，将 SCSS 转换为 CSS，将 ES6 代码转译为 ES5）。
+对每个模块应用配置的加载器，并生成中间结果。
+
+3. 打包 (Bundling)
+在打包阶段，Webpack 会将所有处理后的模块打包成一个或多个 bundle 文件：
+
+生成模块代码 (Generate Module Code):
+Webpack 将所有模块转换成一个特定格式的 JavaScript 代码，这些代码将用于加载和执行模块。
+生成的代码通常包括了一个依赖图的实现代码，允许 Webpack 动态地加载模块。
+
+输出文件 (Output Files):
+根据配置的输出目录和文件名，将生成的 bundle 文件写入到磁盘。
+
+4. 优化 (Optimization)
+Webpack 在打包过程中还会进行各种优化，以提高性能：
+
+代码分割 (Code Splitting):
+将代码拆分成多个 bundle，减少初次加载的资源量，提高加载速度。
+支持动态导入和按需加载（import()）。
+
+压缩和混淆 (Minification and Obfuscation):
+压缩 JavaScript 和 CSS 文件，去掉多余的空白和注释。
+使用工具（如 Terser 插件）来混淆代码，减小文件大小。
+
+缓存优化 (Caching Optimization):
+为生成的文件添加 hash 值，以便浏览器可以缓存这些文件，从而避免重复下载。
+
+5. 输出 (Output)
+最后，Webpack 将处理后的文件输出到指定的目录：
+
+写入文件系统 (Write to File System):
+将最终生成的 bundle 文件、source map 等写入到磁盘上。
+根据配置的输出目录和文件名进行存储。
+
+
+### Vue 数据绑定机制
+
+1. Vue 如何实现数据劫持
+Vue 实现数据劫持主要通过 Object.defineProperty 方法。Vue 会遍历数据对象的所有属性，为每个属性定义 getter 和 setter。当属性被访问或修改时，Vue 可以检测到这些变化并触发视图更新。具体步骤包括：
+
+数据劫持：在 Vue 的实例化过程中，observe 方法会被调用，它会递归地遍历对象的每个属性，并用 Object.defineProperty 将这些属性的 getter 和 setter 方法重写，以便能够监控属性的变化。
+依赖收集：每当属性被访问时，getter 方法会被调用，Vue 会将当前的订阅者（组件或视图）记录为该属性的依赖。
+通知更新：当属性的 setter 方法被调用时，Vue 会通知所有相关的订阅者（视图或组件），触发视图的重新渲染。
+
+2. Vue 如何实现双向绑定
+Vue 的双向绑定主要依赖于数据劫持和发布-订阅模式的结合：
+
+数据劫持：如上所述，通过 Object.defineProperty 对数据进行劫持，能够检测数据变化。
+指令系统：Vue 通过 v-model 实现双向绑定。v-model 实际是 v-bind:xxx 和 v-on:xxx 的语法糖。当触发元素对应的事件（如 input、change 等）时更新数据（ViewModel），当数据（ViewModel）更新时同步更新到元素的对应属性（View）上。
+
+3. MVVM 是什么
+MVVM（Model-View-ViewModel）是一种设计模式，用于分离用户界面（View）和业务逻辑（Model）：
+
+Model（模型）：表示应用的数据和业务逻辑。它负责数据的存取和处理。
+View（视图）：用户界面的表现层。它展示数据并响应用户交互。
+ViewModel（视图模型）：充当 Model 和 View 之间的中介。它处理用户输入，将其转化为 Model 的操作，并将 Model 的数据更新到 View。
+
+4. Vue2 与 Vue3 的差异
+Vue2 与 Vue3 数据绑定机制的主要差异是劫持方式。Vue2 使用的是 Object.defineProperty 而 Vue3 使用的是 Proxy。Proxy 可以创建一个对象的代理，从而实现对这个对象基本操作的拦截和自定义。
+
+-------无法监听到的变化
+由于受到 JavaScript 设计的限制，Vue2 使用的 Object.defineProperty 并不能完全劫持所有数据的变化，以下是几种无法正常劫持的变化：
+
+1 无法劫持新创建的属性，为了解决这个问题，Vue 提供了 Vue.set 以创建新属性。
+```js
+// 创建 Vue 实例
+const vm = new Vue({
+  data: {
+    person: {
+      name: 'Alice'
+    }
+  }
+});
+
+// 新增属性 'age'
+vm.person.age = 30; // Vue 不会检测到这个变化
+
+// 解决方案：使用 Vue.set
+Vue.set(vm.person, 'age', 30); // Vue 能够正确地劫持这个新属性
+
+```
+2 无法劫持数组的变化，为了解决这个问题，Vue 对数组原生方法进行了劫持。
+```js
+// 创建 Vue 实例
+const vm = new Vue({
+  data: {
+    numbers: [1, 2, 3]
+  }
+});
+
+// 使用数组的原生方法（如 push）修改数组
+vm.numbers.push(4); // Vue 不会检测到这个变化
+
+// 解决方案：Vue 对数组原生方法进行了劫持
+// 所以上述 push 操作实际上会触发视图更新
+
+```
+3 无法劫持利用索引修改数组元素，这个问题同样可以用 Vue.set 解决。
+```js
+// 创建 Vue 实例
+const vm = new Vue({
+  data: {
+    numbers: [1, 2, 3]
+  }
+});
+
+// 直接使用索引修改数组元素
+vm.numbers[1] = 4; // Vue 不会检测到这个变化
+
+// 解决方案：使用 Vue.set 修改数组元素
+Vue.set(vm.numbers, 1, 4); // Vue 能够正确地劫持这个修改
+
+```
+
+computed 等同于为属性设置 getter 函数（也可设置 setter），而 watch 等同于为属性的 setter 设置回调函数、监听深度 deep 及响应速度 immediate。
+
+computed：需要处理复杂逻辑的模板表达式。
+```js
+const author = reactive({
+  name: 'John Doe',
+  books: [
+    'Vue 2 - Advanced Guide',
+    'Vue 3 - Basic Guide',
+    'Vue 4 - The Mystery'
+  ]
+})
+
+// 一个计算属性 ref
+const publishedBooksMessage = computed(() => {
+  return author.books.length > 0 ? 'Yes' : 'No'
+})
+```
+watch：需要执行异步或开销较大的操作。
+```js
+const x = ref(0)
+const y = ref(0)
+
+// 单个 ref
+watch(x, (newX) => {
+  console.log(`x is ${newX}`)
+})
+
+// getter 函数
+watch(
+  () => x.value + y.value,
+  (sum) => {
+    console.log(`sum of x + y is: ${sum}`)
+  }
+)
+
+// 多个来源组成的数组
+watch([x, () => y.value], ([newX, newY]) => {
+  console.log(`x is ${newX} and y is ${newY}`)
+})
+```
+watch 只追踪明确侦听的数据源。它不会追踪任何在回调中访问到的东西。
+
+watchEffect，则会在副作用发生期间追踪依赖。它会在同步执行过程中，自动追踪所有能访问到的响应式属性。
+
+```js
+const todoId = ref(1)
+const data = ref(null)
+
+watch(
+  todoId,
+  async () => {
+    const response = await fetch(
+      `https://jsonplaceholder.typicode.com/todos/${todoId.value}`
+    )
+    data.value = await response.json()
+  },
+  { immediate: true }
+)
+
+watchEffect(async () => {
+  const response = await fetch(
+    `https://jsonplaceholder.typicode.com/todos/${todoId.value}`
+  )
+  data.value = await response.json()
+})
+```
+
+
+### 闭包的作用和原理
+作用：能够在函数定义的作用域外，使用函数定义作用域内的局部变量，并且不会污染全局。
+
+在 JavaScript 中，每当创建一个函数，闭包就会在函数创建的同时被创建出来。
+
+```js
+function foo() {
+  var a = "hzfe";
+  function bar() {
+    console.log(a);
+  }
+  return bar;
+}
+
+var baz = foo();
+baz(); // hzfe
+```
