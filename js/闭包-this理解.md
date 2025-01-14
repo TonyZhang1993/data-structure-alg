@@ -14,7 +14,6 @@ function outer(x) {
 
 ### 闭包使用场景
 
-- 创建私有变量
 - 延长变量的生命周期
 
 > 一般函数的词法环境在函数返回后就被销毁,但是闭包会保存对创建时所在词法环境的引用,即便创建时所在的执行上下文被销毁,但创建时所在词法环境依然存在,以达到延长变量的生命周期的目的
@@ -37,6 +36,8 @@ document.getElementById('size-16').onclick = size16;
 ```
 
 在JavaScript中,没有支持声明私有变量,但我们可以使用闭包来模拟私有方法
+
+- 创建私有变量
 
 ```js
 var makeCounter = function() {
@@ -65,6 +66,7 @@ Counter1.increment();
 console.log(Counter1.value()); /* logs 2 */
 Counter1.decrement();
 console.log(Counter1.value()); /* logs 1 */
+Counter1.decrement();
 console.log(Counter2.value()); /* logs 0 */
 //  上述通过使用闭包来定义公共函数,并令其可以访问私有函数和变量,这种方式也叫模块方式
 
@@ -153,7 +155,7 @@ function eventEmitter() {
   function emit(eventName, ...args) {
     // 赋值订阅者数组
     const callbacks = events[eventName];
-    if (callbacks) {
+    if (callbacks.length > 0) {
       callbacks.forEach(callback => callback(...args));
     }
   }
@@ -192,6 +194,15 @@ emitter.off('hello', handler1);
 emitter.emit('hello', 'Bob'); // 只输出 "Bob says hello from handler2"
 
 ```
+
+forEach((item. index, arr) => {....})
+
+function test(...arg) {
+  //  arg 数组
+  //  arguments 类数组，不能用数组方法
+  fn(...arg)
+  fn(...arguments)
+}
 
 ### 闭包缺点及解决方案
 1 内存泄露
