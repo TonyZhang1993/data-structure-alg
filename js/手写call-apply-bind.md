@@ -361,3 +361,22 @@ foo('name', 'age')
 
 ### others
 数组的众多函数中,只有concat() slice() map() filter() join()函数,原数组不会改变; 
+
+数组循环建议使用：
+for / for...of / forEach
+不要使用for...in
+
+使用for in会遍历数组所有的可枚举属性，包括原型，如果不想遍历原型方法和属性的话，可以在循环内部判断一下，使用hasOwnProperty()方法可以判断某属性是不是该对象的实例属性
+
+```js
+for (let index in arr) {
+  if (arr.hasOwnProperty(index)) {
+    console.log(arr[index])
+  }
+}
+
+
+for...of 不用用来遍历object 的值，可以使用
+for (let key of Object.keys(obj))
+
+```
